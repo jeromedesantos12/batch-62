@@ -39,12 +39,19 @@ button {
   margin-bottom: 1em;
   color: #ffff;
   background-color: #000000;
+  border: 0.1em solid #000000;
   border-radius: 5em;
   padding: 0.5em 1em;
   font-size: 1em;
   font-weight: 300;
   cursor: pointer;
   flex: 2;
+}
+
+button:hover {
+  color: #000000;
+  background-color: #ffff;
+  border: 0.1em solid #000000;
 }
 
 section {
@@ -57,6 +64,10 @@ section {
   font-size: 1em;
 }
 
+section:hover {
+  color: #868686;
+}
+
 .socials {
   margin-bottom: 2em;
   display: flex;
@@ -67,9 +78,16 @@ section {
 
 .socials a {
   border-radius: 100%;
-  border: 0.8em solid black;
+  padding: 0.5em;
+  border: 0.1em solid #000000;
   color: #ffff;
   background-color: #000000;
+}
+
+.socials a:hover {
+  color: #000000;
+  background-color: #ffff;
+  border: 0.1em solid #000000;
 }
 
 .wrapper {
