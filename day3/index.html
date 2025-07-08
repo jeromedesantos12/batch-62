@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/cdn.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <div class="menubar">
+      <nav>
+        <img src="assets/img/logo.png" alt="logo" />
+        <a href="#">Home</a>
+        <a href="#">My Project</a>
+      </nav>
+      <button class="tombol-contactMe">Contact Me</button>
+    </div>
+
+    <div class="container">
+      <h1>GET IN TOUCH</h1>
+      <form action="/daftar" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+
+        <label for="phone">Phone Number</label>
+        <input type="number" id="phone" name="phone" />
+
+        <label for="ukuran">Subject</label>
+        <select name="ukuran" id="">
+          <option value="#" selected></option>
+          <option value="s">Small</option>
+          <option value="m">Medium</option>
+          <option value="l">Large</option>
+        </select>
+
+        <label for="notes">Your Message</label>
+        <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+
+        <button class="submit" type="submit">submit</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -57,8 +57,6 @@ p {
 }
 
 .tombol-cv {
-  display: flex;
-  gap: 1em;
   padding: 0 1em;
   cursor: pointer;
   font-weight: 500;
@@ -67,6 +65,10 @@ p {
 
 .tombol-cv:hover {
   color: #868686;
+}
+
+.tombol-cv span {
+  margin-right: 1em;
 }
 
 .socials {
