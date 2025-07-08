@@ -43,7 +43,6 @@ p {
   font-size: 1em;
   font-weight: 300;
   cursor: pointer;
-  flex: 2;
 }
 
 .tombol-contact:hover {
