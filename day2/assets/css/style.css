@@ -1,20 +1,16 @@
 body {
   font-family: "Ubuntu", sans-serif;
-  display: grid;
-  place-items: center;
   height: 100svh;
   font-weight: 400;
   word-spacing: 0.2em;
   text-align: justify;
-  background-color: #e6e6e6;
+  background-color: #ffff;
 }
 
 .container {
   width: 100%;
-  max-width: 800px;
-  padding: 5em 10em 2em 10em;
+  padding: 5em 20% 2em 20%;
   box-sizing: border-box;
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
   background-color: #ffff;
   border-radius: 1em;
   display: flex;
@@ -59,6 +55,7 @@ p {
 
 .tombol-cv {
   display: flex;
+  flex-direction: row;
   gap: 1em;
   padding: 0 1em;
   cursor: pointer;
@@ -124,12 +121,45 @@ p {
   margin-bottom: 0.2em;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 768px) {
   body {
-    background-color: #ffff;
+    display: grid;
+    place-items: center;
+    background-color: #e6e6e6;
   }
   .container {
-    padding: 5em 20% 2em 20%;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0);
+    width: 100%;
+    max-width: 900px;
+    padding: 3em;
+    flex-direction: row;
+    gap: 3em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  }
+
+  .wrapper-atas {
+    flex: 2;
+  }
+
+  .wrapper-bawah {
+    flex: 1;
+  }
+
+  .tombol {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .tombol-contact {
+    flex: 1;
+  }
+
+  .tombol-cv {
+    flex: 4;
+    margin-bottom: 1em;
+  }
+
+  .socials {
+    margin: 3em 0 0;
+    justify-content: start;
   }
 }
