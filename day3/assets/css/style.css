@@ -9,18 +9,78 @@ body {
   word-break: break-word;
 }
 
+.menu-toggle {
+  height: 2em;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 1em;
+  z-index: 3;
+}
+
+.menu-toggle span {
+  height: 0.5em;
+  width: 2em;
+  background-color: #000000;
+  border-radius: 1em;
+}
+
+.menu-toggle:hover span {
+  background-color: #868686;
+}
+
+.menu-mini {
+  font-size: 1.2em;
+  padding: 8em 1em;
+  box-sizing: border-box;
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  gap: 1.5em;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+  transition: all 1s ease;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.menu-mini.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-mini a {
+  color: #000000;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.menu-mini a:hover {
+  color: #868686;
+}
+
+.menu-mini a:active {
+  font-weight: 500;
+}
+
 .menubar {
   width: 100%;
-  min-width: 768px;
   background-color: #ffff;
   padding: 1em 10%;
   box-sizing: border-box;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
   display: flex;
+  gap: 1em;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
+  z-index: 1;
 }
 
 .menubar nav {
@@ -32,10 +92,6 @@ body {
 .menubar nav img {
   width: 3em;
   cursor: pointer;
-}
-
-.menubar nav img:hover {
-  filter: brightness(150%);
 }
 
 .menubar nav a {
@@ -112,6 +168,19 @@ textarea {
     width: 100%;
     max-width: 500px;
     padding: 2em;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu-mini.active {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  .menubar {
+    justify-content: space-between;
   }
 
   .menubar nav a {
