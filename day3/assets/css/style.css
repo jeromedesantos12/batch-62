@@ -15,7 +15,6 @@ body {
   place-items: center;
   cursor: pointer;
   border-radius: 1em;
-  z-index: 3;
 }
 
 .menu-toggle span {
