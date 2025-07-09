@@ -4,7 +4,7 @@ body {
   font-weight: 400;
   word-spacing: 0.2em;
   text-align: justify;
-  margin-top: 5em;
+  margin-top: 4em;
   background-color: #e6e6e6;
   word-break: break-word;
 }
@@ -22,10 +22,24 @@ body {
   width: 2em;
   background-color: #000000;
   border-radius: 1em;
+  transition: all 0.5s ease;
 }
 
-.menu-toggle:hover span {
-  background-color: #868686;
+.menu-toggle span.active:nth-child(1) {
+  transform: rotate(45deg);
+  transform-origin: 0 100%;
+  margin-bottom: 0.5em;
+}
+
+.menu-toggle span.active:nth-child(2) {
+  opacity: 0;
+  display: none;
+}
+
+.menu-toggle span.active:nth-child(3) {
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+  margin-top: 0.5em;
 }
 
 .menu-mini {
@@ -157,10 +171,18 @@ textarea {
   border: 0.1em solid #000000;
 }
 
+form span {
+  color: #dc3545;
+  font-weight: 500;
+  font-size: 0.7em;
+  margin: 0 0 1em 0.5em;
+}
+
 @media (min-width: 768px) {
   body {
     display: grid;
     place-items: center;
+    margin-top: 8em;
   }
 
   .container {
