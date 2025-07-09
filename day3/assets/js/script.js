@@ -14,8 +14,7 @@ const subjectErr = document.querySelector(`#subject + span`);
 const notesErr = document.querySelector(`#notes + span`);
 
 // validasi nama
-name.addEventListener(`input`, (e) => {
-  e.preventDefault();
+name.addEventListener(`input`, () => {
   switch (true) {
     case !name.value:
       nameErr.innerText = `*Nama tidak boleh kosong!`;
@@ -32,8 +31,7 @@ name.addEventListener(`input`, (e) => {
 });
 
 // validasi email
-email.addEventListener(`input`, (e) => {
-  e.preventDefault();
+email.addEventListener(`input`, () => {
   switch (true) {
     case !email.value:
       emailErr.innerText = `*Email tidak boleh kosong!`;
@@ -47,8 +45,7 @@ email.addEventListener(`input`, (e) => {
 });
 
 // validasi phone
-phone.addEventListener(`input`, (e) => {
-  e.preventDefault();
+phone.addEventListener(`input`, () => {
   switch (true) {
     case !phone.value:
       phoneErr.innerText = `*Nomor telepon tidak boleh kosong!`;
@@ -59,8 +56,7 @@ phone.addEventListener(`input`, (e) => {
 });
 
 // validasi subject
-subject.addEventListener(`input`, (e) => {
-  e.preventDefault();
+subject.addEventListener(`input`, () => {
   switch (true) {
     case !subject.value || subject.value === ``:
       subjectErr.innerText = `*Silakan pilih salah satu opsi!`;
@@ -74,8 +70,7 @@ subject.addEventListener(`input`, (e) => {
 });
 
 // validasi notes
-notes.addEventListener(`input`, (e) => {
-  e.preventDefault();
+notes.addEventListener(`input`, () => {
   switch (true) {
     case notes.value.length === 0:
       notesErr.innerText = `*Pesan tidak boleh kosong.`;
@@ -92,6 +87,6 @@ notes.addEventListener(`input`, (e) => {
   }
 });
 
-kirim.addEventListener(`click`, (e) => {
+submit.addEventListener(`click`, (e) => {
   e.preventDefault();
 });
