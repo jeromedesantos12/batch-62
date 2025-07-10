@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/cdn.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script src="assets/js/navbar.js" defer></script>
+    <script src="assets/js/input.js" defer></script>
+    <script src="assets/js/output.js" defer></script>
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <!-- bagian menu -->
+    <div class="menubar">
+      <nav>
+        <img src="assets/img/logo.png" alt="logo" />
+        <a href="#">Home</a>
+        <a href="#">My Project</a>
+      </nav>
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <button class="tombol-contactMe">Contact Me</button>
+    </div>
+
+    <div class="menu-mini">
+      <a href="#">Home</a>
+      <a href="#">My Project</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <!-- isi konten -->
+    <div class="container">
+      <h1>ADD MY PROJECT</h1>
+      <form action="#" method="post">
+        <div class="name">
+          <label name="name" for="name">Project Name</label>
+          <input type="text" id="name" />
+          <span></span>
+        </div>
+
+        <div class="date">
+          <section>
+            <div class="startDate">
+              <label for="startDate">Start Date</label>
+              <input type="date" id="startDate" name="startDate" />
+            </div>
+            <div class="endDate">
+              <label for="endDate">End Date</label>
+              <input type="date" id="endDate" name="endDate" />
+            </div>
+          </section>
+          <span></span>
+        </div>
+
+        <div class="desc">
+          <label for="desc">Description</label>
+          <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+          <span></span>
+        </div>
+
+        <div class="tech">
+          <label>Technologies</label>
+          <section>
+            <div class="side">
+              <section>
+                <input type="checkbox" id="nodeJS" value="nodeJS" name="tech" />
+                <label for="nodeJS">Node JS</label>
+              </section>
+              <section>
+                <input
+                  type="checkbox"
+                  id="reactJS"
+                  value="reactJS"
+                  name="tech"
+                />
+                <label for="reactJSs">React JS</label>
+              </section>
+            </div>
+            <div class="side">
+              <section>
+                <input type="checkbox" id="nextJS" value="nextJS" name="tech" />
+                <label for="nextJS">Next JS</label>
+              </section>
+              <section>
+                <input
+                  type="checkbox"
+                  id="typeScript"
+                  value="typeScript"
+                  name="tech"
+                />
+                <label for="typeScripts">TypeScript</label>
+              </section>
+            </div>
+          </section>
+          <span></span>
+        </div>
+
+        <div class="image">
+          <label for="image">Upload Image</label>
+          <input type="file" id="image" accept="image/*" />
+          <span></span>
+        </div>
+
+        <button class="submit" type="submit">submit</button>
+      </form>
+    </div>
+    <div class="dropDown">
+      <h1>MY PROJECT</h1>
+      <div class="wrapper">
+        <div class="cards">
+          <img src="#" alt="test image" />
+          <h2>Dumbways Mobile App - 2021</h2>
+          <span>durasi 3 bulan</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
+            consequuntur enim, quas unde impedit nihil eum vitae at soluta quod
+            cum aspernatur, laboriosam voluptatem tempora. Odio nulla labore
+            vitae doloremque.
+          </p>
+          <div class="socials">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+          </div>
+          <div class="buttons">
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <img src="#" alt="test image" />
+          <h2>Dumbways Mobile App - 2021</h2>
+          <span>durasi 3 bulan</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
+            consequuntur enim, quas unde impedit nihil eum vitae at soluta quod
+            cum aspernatur, laboriosam voluptatem tempora. Odio nulla labore
+            vitae doloremque.
+          </p>
+          <div class="socials">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+          </div>
+          <div class="buttons">
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

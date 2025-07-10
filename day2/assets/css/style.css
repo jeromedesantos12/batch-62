@@ -71,6 +71,7 @@ body {
   color: #000000;
   display: inline-block;
   text-decoration: none;
+  transition: all 0.5s ease;
 }
 
 .menu-mini a:hover {
@@ -148,6 +149,9 @@ p {
   font-weight: 300;
   cursor: pointer;
   flex: 2;
+  font-weight: 500;
+  font-family: Ubuntu, sans-serif;
+  transition: all 0.5s ease;
 }
 
 .tombol-contact:hover {
@@ -166,6 +170,7 @@ p {
   cursor: pointer;
   font-weight: 500;
   font-size: 1em;
+  transition: all 0.5s ease;
 }
 
 .tombol-cv:hover {
@@ -190,6 +195,7 @@ p {
   border: 0.1em solid #000000;
   color: #ffff;
   background-color: #000000;
+  transition: all 0.5s ease;
 }
 
 .socials a:hover {
@@ -214,7 +220,6 @@ p {
 .profile {
   width: 100%;
   max-width: 250px;
-  box-sizing: border-box;
   border-radius: 1em;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
 }
@@ -265,6 +270,7 @@ p {
     text-decoration: none;
     color: #000000;
     width: 5em;
+    transition: all 0.5s ease;
   }
 
   .menubar nav a:hover {
@@ -280,17 +286,18 @@ p {
   }
 
   .menubar .tombol-contactMe {
-    height: 2.5em;
     color: #ffff;
     background-color: #000000;
     border: 0.1em solid #000000;
     border-radius: 1em;
-    padding: 0 2em;
+    padding: 0.5em 2em;
     box-sizing: border-box;
     font-size: 1em;
-    font-weight: 300;
     cursor: pointer;
     display: block;
+    font-weight: 500;
+    font-family: Ubuntu, sans-serif;
+    transition: all 0.5s ease;
   }
 
   .menubar .tombol-contactMe:hover {
