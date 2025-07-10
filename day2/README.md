@@ -1,1 +1,1 @@
-![](assets/img/day2.jpg)
+![](assets/img/day2.png)
