@@ -1,4 +1,5 @@
 // ambil input
+const form = document.querySelector(`.container form`);
 const name = document.querySelector(`#name`);
 const startDate = document.querySelector(`#startDate`);
 const endDate = document.querySelector(`#endDate`);
@@ -21,12 +22,8 @@ endDate.addEventListener(`input`, dateValid);
 desc.addEventListener(`input`, descriptionValid);
 tech.forEach((tc) => tc.addEventListener(`click`, techValid));
 image.addEventListener(`change`, imageValid);
-submit.addEventListener(`click`, (e) => {
-  e.preventDefault();
-  handleSubmit();
-});
 
-// fungsi validasi
+// validasi nama
 function nameValid() {
   switch (true) {
     case !name.value:
@@ -42,6 +39,8 @@ function nameValid() {
       projectNameERR.innerText = ``;
   }
 }
+
+// validasi tanggal
 function dateValid() {
   switch (true) {
     case !startDate.value || !endDate.value:
@@ -57,6 +56,8 @@ function dateValid() {
       dateERR.innerText = ``;
   }
 }
+
+// validasi textarea
 function descriptionValid() {
   switch (true) {
     case desc.value.length === 0:
@@ -65,13 +66,15 @@ function descriptionValid() {
     case desc.value.length < 10:
       descriptionERR.innerText = `*Deskripsi harus minimal 10 karakter.`;
       break;
-    case desc.value.length > 200:
-      descriptionERR.innerText = `*Deskripsi tidak boleh lebih dari 200 karakter.`;
+    case desc.value.length > 2000:
+      descriptionERR.innerText = `*Deskripsi tidak boleh lebih dari 2000 karakter.`;
       break;
     default:
       descriptionERR.innerText = ``;
   }
 }
+
+// validasi checkbox
 function techValid() {
   // buat array baru isinya cuma yang udah di ceklis
   const checkedTechs = Array.from(tech)
@@ -89,6 +92,8 @@ function techValid() {
       techERR.innerText = ``;
   }
 }
+
+// validasi gambar
 function imageValid() {
   const file = image.files[0];
   switch (true) {
@@ -103,57 +108,5 @@ function imageValid() {
       break;
     default:
       imageERR.innerText = ``;
-  }
-}
-
-function handleSubmit() {
-  // Jalankan semua validasi
-  nameValid();
-  dateValid();
-  descriptionValid();
-  techValid();
-  imageValid();
-
-  switch (true) {
-    // Cek apakah ada pesan Error pada setiap input
-    case !!projectNameERR.innerText:
-    case !!dateERR.innerText:
-    case !!descriptionERR.innerText:
-    case !!techERR.innerText:
-    case !!imageERR.innerText:
-      alert(`Form tidak valid, periksa kembali input!`);
-      break;
-
-    default:
-      // Ambil daftar teknologi yang dicentang oleh pengguna
-      const checkedTechs = Array.from(tech)
-        .filter((cb) => cb.checked)
-        .map((cb) => cb.value);
-
-      // Ambil file gambar dari input
-      const file = image.files[0];
-      const reader = new FileReader();
-
-      // Setelah gambar dibaca (konversi ke base64)
-      reader.onload = function () {
-        const imgBase64 = reader.result;
-
-        // Buat objek project dengan semua data
-        const projectData = {
-          name: name.value.trim(),
-          startDate: startDate.value,
-          endDate: endDate.value,
-          desc: desc.value.trim(),
-          tech: checkedTechs,
-          imgData: imgBase64, // Gambar dalam bentuk string base64
-        };
-
-        // Simpan data project ke localStorage
-        localStorage.setItem(`projectData`, JSON.stringify(projectData));
-        alert(`✅ Data berhasil disimpan di localStorage:`, projectData);
-      };
-
-      // Jalankan proses pembacaan file gambar
-      reader.readAsDataURL(file);
   }
 }

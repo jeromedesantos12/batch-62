@@ -4,13 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/cdn.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
 
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script> -->
     <script src="assets/js/navbar.js" defer></script>
-    <script src="assets/js/input.js" defer></script>
-    <script src="assets/js/output.js" defer></script>
+
+    <script src="assets/js/valid.js" defer></script>
+    <script src="assets/js/submit.js" defer></script>
+
+    <script src="assets/js/get.js" defer></script>
+    <script src="assets/js/load.js" defer></script>
+
+    <script src="assets/js/crud.js" defer></script>
+
     <title>Portfolio</title>
   </head>
   <body>
@@ -70,32 +86,32 @@
           <section>
             <div class="side">
               <section>
-                <input type="checkbox" id="nodeJS" value="nodeJS" name="tech" />
-                <label for="nodeJS">Node JS</label>
+                <input type="checkbox" id="js" value="js" name="tech" />
+                <label for="js">JavaScript</label>
               </section>
               <section>
                 <input
                   type="checkbox"
-                  id="reactJS"
-                  value="reactJS"
+                  id="reactjs"
+                  value="reactjs"
                   name="tech"
                 />
-                <label for="reactJSs">React JS</label>
+                <label for="reactjs">React JS</label>
               </section>
             </div>
             <div class="side">
               <section>
-                <input type="checkbox" id="nextJS" value="nextJS" name="tech" />
-                <label for="nextJS">Next JS</label>
+                <input type="checkbox" id="php" value="php" name="tech" />
+                <label for="php">PHP</label>
               </section>
               <section>
                 <input
                   type="checkbox"
-                  id="typeScript"
-                  value="typeScript"
+                  id="laravel"
+                  value="laravel"
                   name="tech"
                 />
-                <label for="typeScripts">TypeScript</label>
+                <label for="laravel">Laravel</label>
               </section>
             </div>
           </section>
@@ -111,11 +127,11 @@
         <button class="submit" type="submit">submit</button>
       </form>
     </div>
-    <div class="dropDown">
+    <div id="dropDown">
       <h1>MY PROJECT</h1>
       <div class="wrapper">
-        <div class="cards">
-          <img src="#" alt="test image" />
+        <!-- <div class="cards">
+          <div class="cover"></div>
           <h2>Dumbways Mobile App - 2021</h2>
           <span>durasi 3 bulan</span>
           <p>
@@ -124,7 +140,7 @@
             cum aspernatur, laboriosam voluptatem tempora. Odio nulla labore
             vitae doloremque.
           </p>
-          <div class="socials">
+          <div class="techs">
             <a href="#"></a>
             <a href="#"></a>
             <a href="#"></a>
@@ -132,29 +148,8 @@
           <div class="buttons">
             <button>Edit</button>
             <button>Delete</button>
-          </div>
-        </div>
-
-        <div class="cards">
-          <img src="#" alt="test image" />
-          <h2>Dumbways Mobile App - 2021</h2>
-          <span>durasi 3 bulan</span>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-            consequuntur enim, quas unde impedit nihil eum vitae at soluta quod
-            cum aspernatur, laboriosam voluptatem tempora. Odio nulla labore
-            vitae doloremque.
-          </p>
-          <div class="socials">
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-          </div>
-          <div class="buttons">
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </div>
+          </div>    
+        </div> -->
       </div>
     </div>
   </body>
