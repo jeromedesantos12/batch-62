@@ -127,6 +127,7 @@ body {
 }
 
 h1 {
+  line-height: 1em;
   text-align: center;
   font-weight: 700;
   font-size: 1.5em;
