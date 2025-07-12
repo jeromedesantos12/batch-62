@@ -1,5 +1,5 @@
 // ambil element wrapper
-const wrapper = document.querySelector(".wrapper");
+const wrapper = document.querySelector(`.wrapper`);
 const form = document.querySelector(`.container form`);
 
 // tampilkan cards
@@ -38,10 +38,10 @@ function loadProjects() {
 
     const techSpan = techIN
       .map((tech) => {
-        const [name, icon] = dataTech[tech.toLowerCase()] || [tech, ""];
+        const [name, icon] = dataTech[tech.toLowerCase()] || [tech, ``];
         return icon || `<span>${name}</span>`;
       })
-      .join("");
+      .join(``);
 
     // PROSES LOOP!
     // 1. tech = `js` (pasti huruf kecil, karena dari checkbox)

@@ -17,20 +17,20 @@ function detailProject(index) {
     getData(project);
 
   function formatDate(date) {
-    const [year, month, day] = date.toISOString().slice(0, 10).split("-");
+    const [year, month, day] = date.toISOString().slice(0, 10).split(`-`);
     const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
+      `Jan`,
+      `Feb`,
+      `Mar`,
+      `Apr`,
+      `May`,
+      `Jun`,
+      `Jul`,
+      `Aug`,
+      `Sept`,
+      `Oct`,
+      `Nov`,
+      `Dec`,
     ];
 
     return `${day} ${monthNames[parseInt(month) - 1]} ${year}`;
@@ -42,10 +42,10 @@ function detailProject(index) {
 
   const techSpan = techIN
     .map((tech) => {
-      const [name, icon] = dataTech[tech.toLowerCase()] || [tech, ""];
+      const [name, icon] = dataTech[tech.toLowerCase()] || [tech, ``];
       return `<span>${icon}<p>${name}</p></span>`;
     })
-    .join("");
+    .join(``);
 
   detailHTML += `
       <div class="pages">
@@ -59,8 +59,7 @@ function detailProject(index) {
               <h2>Duration</h2>
                 <span
                   ><i class="bi bi-calendar-week"></i>
-                  <p>
-                  ${formatDate(startDateIN)} - ${formatDate(endDateIN)}</p>
+                  <p>${formatDate(startDateIN)} - ${formatDate(endDateIN)}</p>
                   </span>
                 <span
                   ><i class="bi bi-clock-history"></i>
@@ -93,12 +92,12 @@ function deleteProject(index) {
   const key = `projectData-${index}`;
 
   Swal.fire({
-    title: "Ingin menghapus data?",
+    title: `Ingin menghapus data?`,
     showCancelButton: true,
-    confirmButtonText: "Hapus",
+    confirmButtonText: `Hapus`,
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire("Data Dihapus!", "", "success");
+      Swal.fire(`Data Dihapus!`, ``, `success`);
       localStorage.removeItem(key); // hapus dari localStorage
       load(`dropDown`); // refresh
     }
