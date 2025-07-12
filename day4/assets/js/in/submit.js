@@ -65,13 +65,14 @@ function handleSubmit() {
         `projectData-${nextIndex}`,
         JSON.stringify(projectData)
       );
+
       load(`dropDown`); // refresh
 
       Swal.fire({
         title: `Berhasil!`,
         text: `✅ Data berhasil disimpan di localStorage`,
         icon: `success`,
-      });
+      }).then(load(`dropDown`)); // refresh);
     };
 
     reader.readAsDataURL(file);
