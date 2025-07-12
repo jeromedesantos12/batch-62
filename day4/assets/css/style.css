@@ -5,7 +5,8 @@ html {
 body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 400;
-  word-spacing: 0.2em;
+  /* word-spacing: 0.2em; */
+  line-height: 1em;
   text-align: justify;
   margin-top: 10em;
   background-color: #e6e6e6;
@@ -27,7 +28,6 @@ body {
   top: 0;
   bottom: 0;
   z-index: 3;
-  /* display: none; */
   display: flex;
   gap: 2em;
   justify-content: center;
@@ -65,7 +65,7 @@ body {
 .pages {
   width: 70%;
   height: 100%;
-  background-color: #ffff;
+  background-color: #e6e6e6;
   overflow: scroll;
   padding: 5em 5em;
   box-sizing: border-box;
@@ -107,6 +107,12 @@ body {
   gap: 3em;
 }
 
+.page p {
+  line-height: 2em;
+  white-space: pre-line;
+  text-align: justify;
+}
+
 .info h2 {
   font-weight: 500;
 }
@@ -121,14 +127,15 @@ body {
 .info aside span {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 1em;
 }
 
 .info aside span i {
-  width: 1em;
+  width: 1.5em;
   height: 1em;
   display: block;
   font-size: 2em;
+  text-align: center;
 }
 
 .add {

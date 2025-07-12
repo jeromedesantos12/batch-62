@@ -2,9 +2,8 @@ body {
   font-family: "Ubuntu", sans-serif;
   display: grid;
   place-items: center;
-  height: 100svh;
+  line-height: 1em;
   font-weight: 400;
-  word-spacing: 0.2em;
   text-align: justify;
   background-color: #e6e6e6;
 }

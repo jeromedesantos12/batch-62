@@ -91,9 +91,16 @@ function closeProject() {
 // event dari onclick -> tombol delete
 function deleteProject(index) {
   const key = `projectData-${index}`;
-  const confirmDelete = confirm(`Yakin mau hapus Project #${index}?`);
-  if (!confirmDelete) return;
 
-  localStorage.removeItem(key); // hapus dari localStorage
-  load(`dropDown`); // refresh
+  Swal.fire({
+    title: "Ingin menghapus data?",
+    showCancelButton: true,
+    confirmButtonText: "Hapus",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire("Data Dihapus!", "", "success");
+      localStorage.removeItem(key); // hapus dari localStorage
+      load(`dropDown`); // refresh
+    }
+  });
 }

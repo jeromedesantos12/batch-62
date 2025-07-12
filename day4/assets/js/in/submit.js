@@ -21,7 +21,11 @@ function handleSubmit() {
     techERR.innerText ||
     imageERR.innerText
   ) {
-    alert(`Form tidak valid, periksa kembali input!`);
+    Swal.fire({
+      title: `Gagal!`,
+      text: `Form tidak valid, periksa kembali input!`,
+      icon: `error`,
+    });
   } else {
     // ambil daftar teknologi yang dicentang oleh pengguna
     const checkedTechs = Array.from(tech)
@@ -61,9 +65,13 @@ function handleSubmit() {
         `projectData-${nextIndex}`,
         JSON.stringify(projectData)
       );
-      alert(`✅ Data berhasil disimpan di localStorage:`, projectData);
-
       load(`dropDown`); // refresh
+
+      Swal.fire({
+        title: `Berhasil!`,
+        text: `✅ Data berhasil disimpan di localStorage`,
+        icon: `success`,
+      });
     };
 
     reader.readAsDataURL(file);

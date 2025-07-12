@@ -1,8 +1,7 @@
 body {
   font-family: "Ubuntu", sans-serif;
-  height: 100svh;
   font-weight: 400;
-  word-spacing: 0.2em;
+  line-height: 1em;
   text-align: justify;
   margin-top: 5em;
   word-break: break-word;
@@ -235,7 +234,7 @@ p {
 .profile h2 {
   font-weight: 700;
   font-size: 1.5em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.5em;
 }
 
 @media (min-width: 768px) {
