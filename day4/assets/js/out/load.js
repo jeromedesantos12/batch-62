@@ -26,7 +26,16 @@ function loadProjects() {
     // - Kalau map-nya kosong, kamu stop nyari.
     // - Tapi kalau isinya rusak, kamu lewatin dan lanjut ke map selanjutnya.
 
-    const { nameIN, descIN, imgDataIN, monthsIN, techIN } = getData(projects);
+    const { nameIN, descIN, imgDataIN, startDateIN, endDateIN, techIN } =
+      getData(projects);
+
+    const monthsIN =
+      (endDateIN.getFullYear() - startDateIN.getFullYear()) * 12 +
+      (endDateIN.getMonth() - startDateIN.getMonth());
+    // selisih tahun -> 2025 - 2023 = 2 → 2 * 12 = 24 bulan
+    // selisih bulan -> 7 - 3 = 4 bulan
+    // tambahin -> 24 + 4 = 28 bulan
+
     const techSpan = techIN
       .map((tech) => {
         const [name, icon] = dataTech[tech.toLowerCase()] || [tech, ""];
@@ -39,7 +48,10 @@ function loadProjects() {
     // 2. tech.toLowerCase() -> `js`
     // 3. dataTech[`js`] -> [JavaScript, (element icon)] -> array
     // 4. [name, icon] -> `JavaScript`, (element icon) -> data string
-    // 5. join(``) -> </span>(element icon)</span>
+
+    // DILUAR LOOP
+    // 1. join(``)
+    // [</span>(element icon)</span>, ... ]  -> hasil looping (array di join)
 
     allCardsHTML += `
       <div class="cards">

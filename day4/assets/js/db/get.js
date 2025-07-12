@@ -15,12 +15,6 @@ function getData(storage) {
   const imgDataIN = storage.imgData;
   const startDateIN = new Date(storage.startDate);
   const endDateIN = new Date(storage.endDate);
-  const monthsIN =
-    (endDateIN.getFullYear() - startDateIN.getFullYear()) * 12 +
-    (endDateIN.getMonth() - startDateIN.getMonth());
-  // selisih tahun -> 2025 - 2023 = 2 → 2 * 12 = 24 bulan
-  // selisih bulan -> 7 - 3 = 4 bulan
-  // tambahin -> 24 + 4 = 28 bulan
 
-  return { nameIN, descIN, imgDataIN, monthsIN, techIN };
+  return { nameIN, descIN, imgDataIN, startDateIN, endDateIN, techIN };
 }
