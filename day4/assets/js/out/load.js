@@ -1,5 +1,6 @@
 // ambil element wrapper
 const wrapper = document.querySelector(".wrapper");
+const form = document.querySelector(`.container form`);
 
 // tampilkan cards
 function loadProjects() {
@@ -29,7 +30,7 @@ function loadProjects() {
     const techSpan = techIN
       .map((tech) => {
         const [name, icon] = dataTech[tech.toLowerCase()] || [tech, ""];
-        return `<span>${icon || name}</span>`;
+        return icon || `<span>${name}</span>`;
       })
       .join("");
 
@@ -89,11 +90,17 @@ function reindexProjects() {
   });
 }
 
+// otomatis focus ke id
+function scrollToSection(id) {
+  window.location.hash = id;
+}
+
 // panggil saat halaman dimuat
-function load() {
+function load(id) {
   form.reset();
   reindexProjects();
   loadProjects();
+  scrollToSection(id);
 }
 
-load();
+load(`header`);

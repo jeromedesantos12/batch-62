@@ -63,7 +63,7 @@ function handleSubmit() {
       );
       alert(`✅ Data berhasil disimpan di localStorage:`, projectData);
 
-      load(); // load ulang
+      load(`dropDown`); // refresh
     };
 
     reader.readAsDataURL(file);

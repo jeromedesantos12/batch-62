@@ -1,12 +1,55 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Ubuntu", sans-serif;
-  height: 100svh;
   font-weight: 400;
   word-spacing: 0.2em;
   text-align: justify;
-  margin-top: 4em;
+  margin-top: 10em;
   background-color: #e6e6e6;
   word-break: break-word;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#header {
+  position: absolute;
+  top: 0;
+}
+
+a.add {
+  padding: 0.2em;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  border-radius: 100%;
+  background-color: #000000;
+  border: 0.05em solid #000000;
+  color: #ffff;
+  z-index: 2;
+  font-size: 1em;
+  transition: all 0.5s ease;
+  opacity: 0;
+  pointerevents: "none";
+}
+
+a.add.active {
+  opacity: 1;
+  pointerevents: "auto";
+}
+
+a.add:hover {
+  color: #000000;
+  background-color: #ffff;
+  border: 0.05em solid #000000;
+}
+
+a.add.bi.bi-plus {
+  font-size: 2em;
 }
 
 .menu-toggle {
@@ -84,6 +127,7 @@ body {
 
 .menubar {
   width: 100%;
+  height: 5em;
   background-color: #ffff;
   padding: 1em 10%;
   box-sizing: border-box;
@@ -118,7 +162,7 @@ body {
 
 .container {
   width: 100%;
-  padding: 5em 20% 2em 20%;
+  padding: 0 20% 2em;
   box-sizing: border-box;
   border-radius: 1em;
 }
@@ -245,6 +289,7 @@ input[type="file"]::file-selector-button:hover {
 
 #dropDown {
   width: 100%;
+  height: 100svh;
   padding: 5em;
   box-sizing: border-box;
   background-color: #ffff;
@@ -314,9 +359,10 @@ input[type="file"]::file-selector-button:hover {
 
 .cards .techs span {
   display: inline-block;
+  font-size: 2em;
 }
 
-.cards .techs span .fa-brands {
+.cards .techs .fa-brands {
   border-radius: 100%;
   font-size: 2em;
   padding: 0 0.2em;
@@ -350,16 +396,10 @@ input[type="file"]::file-selector-button:hover {
 }
 
 @media (min-width: 768px) {
-  body {
-    display: grid;
-    place-items: center;
-    margin-top: 8em;
-  }
-
   .container {
     width: 100%;
     max-width: 500px;
-    padding: 2em;
+    padding: 0 2em 2em;
   }
 
   .menu-toggle {

@@ -22,5 +22,5 @@ function deleteProject(index) {
   if (!confirmDelete) return;
 
   localStorage.removeItem(key); // hapus dari localStorage
-  load(); // refresh
+  load(`dropDown`); // refresh
 }

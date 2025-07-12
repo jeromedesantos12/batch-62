@@ -1,5 +1,4 @@
 // ambil input
-const form = document.querySelector(`.container form`);
 const name = document.querySelector(`#name`);
 const startDate = document.querySelector(`#startDate`);
 const endDate = document.querySelector(`#endDate`);
