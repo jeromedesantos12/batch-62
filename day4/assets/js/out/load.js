@@ -104,7 +104,12 @@ function reindexProjects() {
 
 // otomatis focus ke id
 function scrollToSection(id) {
-  window.location.hash = id;
+  id.scrollIntoView();
+  history.pushState(
+    "",
+    document.title,
+    window.location.pathname + window.location.search
+  );
 }
 
 // panggil saat halaman dimuat
@@ -115,4 +120,4 @@ function load(id) {
   scrollToSection(id);
 }
 
-load(`header`);
+load(header); // refresh

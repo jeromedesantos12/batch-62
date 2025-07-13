@@ -4,6 +4,7 @@ const toggleAnimate = document.querySelectorAll(`.menu-toggle span`);
 const miniMenu = document.querySelector(`.menu-mini`);
 const upElement = document.querySelector(`.add`);
 const header = document.querySelector(`#header`);
+const dropDown = document.querySelector(`#dropDown`);
 
 // buat scroll button -> cari isIntersecting (kondisinya true-false) dari array entries
 const observer = new IntersectionObserver((entries) =>
@@ -16,6 +17,16 @@ const observer = new IntersectionObserver((entries) =>
 
 // focus ke header
 observer.observe(header);
+
+// add di klik ->  scroll ke atas
+upElement.addEventListener(`click`, () => {
+  header.scrollIntoView();
+  history.pushState(
+    "",
+    document.title,
+    window.location.pathname + window.location.search
+  );
+});
 
 // buat navigasi -> tambahin class baru
 toggleMenu.addEventListener(`click`, () => {
