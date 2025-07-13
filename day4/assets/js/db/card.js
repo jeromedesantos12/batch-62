@@ -93,5 +93,5 @@ function deleteProject(index) {
   if (!confirmDelete) return;
 
   localStorage.removeItem(key); // hapus dari localStorage
-  load(`dropDown`); // refresh
+  load(dropDown); // refresh
 }
