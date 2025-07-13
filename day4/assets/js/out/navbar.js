@@ -12,12 +12,7 @@ observer.observe(header);
 
 // add di klik ->  scroll ke atas
 upElement.addEventListener(`click`, () => {
-  header.scrollIntoView();
-  history.pushState(
-    "",
-    document.title,
-    window.location.pathname + window.location.search
-  );
+  scrollToSection(header);
 });
 
 // buat navigasi -> tambahin class baru

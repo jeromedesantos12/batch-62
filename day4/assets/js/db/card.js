@@ -89,7 +89,7 @@ function closeProject() {
 function deleteProject(index) {
   const key = `projectData-${index}`;
 
-  const confirmDelete = confirm(`Yakin mau hapus Project #${index}?`);
+  const confirmDelete = confirm(`Yakin mau hapus Project?`);
   if (!confirmDelete) return;
 
   localStorage.removeItem(key); // hapus dari localStorage

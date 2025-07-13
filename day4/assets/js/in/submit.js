@@ -7,22 +7,23 @@ submit.addEventListener(`click`, (e) => {
 // fungsi submit
 function handleSubmit() {
   // jalankan semua validasi
-  nameValid();
-  dateValid();
-  descriptionValid();
-  techValid();
-  imageValid();
+  const isNameValid = nameValid();
+  const isDateValid = dateValid();
+  const isDescValid = descriptionValid();
+  const isTechValid = techValid();
+  const isImageValid = imageValid();
 
   // ambil data
   if (
-    projectNameERR.innerText ||
-    dateERR.innerText ||
-    descriptionERR.innerText ||
-    techERR.innerText ||
-    imageERR.innerText
+    !isNameValid ||
+    !isDateValid ||
+    !isDescValid ||
+    !isTechValid ||
+    !isImageValid
   ) {
-    alert(`Form tidak valid, periksa kembali input!`);
+    alert("Form tidak valid, periksa kembali input!");
     scrollToSection(header); // refresh
+    return;
   } else {
     // ambil daftar teknologi yang dicentang oleh pengguna
     const checkedTechs = Array.from(tech)

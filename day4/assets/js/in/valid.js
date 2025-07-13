@@ -11,15 +11,16 @@ function nameValid() {
   switch (true) {
     case !name.value:
       projectNameERR.innerText = `*Nama Project tidak boleh kosong!`;
-      break;
+      return false;
     case !/^[a-zA-Z\s]+$/.test(name.value):
       projectNameERR.innerText = `*Nama Project hanya boleh berisi huruf dan spasi!`;
-      break;
+      return false;
     case name.value.trim().length < 2:
       projectNameERR.innerText = `*Nama Project terlalu pendek!`;
-      break;
+      return false;
     default:
       projectNameERR.innerText = ``;
+      return true;
   }
 }
 
@@ -28,15 +29,16 @@ function dateValid() {
   switch (true) {
     case !startDate.value || !endDate.value:
       dateERR.innerText = `*Tanggal mulai dan/atau tanggal akhir belum dipilih.`;
-      break;
+      return false;
     case startDate.value > endDate.value:
       dateERR.innerText = `*Tanggal mulai tidak boleh lebih besar dari tanggal akhir.`;
-      break;
+      return false;
     case startDate.value === endDate.value:
       dateERR.innerText = `*Tanggal mulai dan tanggal akhir tidak boleh sama.`;
-      break;
+      return false;
     default:
       dateERR.innerText = ``;
+      return true;
   }
 }
 
@@ -45,15 +47,16 @@ function descriptionValid() {
   switch (true) {
     case desc.value.length === 0:
       descriptionERR.innerText = `*Deskripsi tidak boleh kosong.`;
-      break;
+      return false;
     case desc.value.length < 10:
       descriptionERR.innerText = `*Deskripsi harus minimal 10 karakter.`;
-      break;
+      return false;
     case desc.value.length > 2000:
       descriptionERR.innerText = `*Deskripsi tidak boleh lebih dari 2000 karakter.`;
-      break;
+      return false;
     default:
       descriptionERR.innerText = ``;
+      return true;
   }
 }
 
@@ -67,12 +70,13 @@ function techValid() {
   switch (true) {
     case checkedTechs.length === 0:
       techERR.innerText = `*Pilih minimal satu teknologi.`;
-      break;
+      return false;
     case checkedTechs.length > 2:
       techERR.innerText = `*Maksimal 2 teknologi boleh dipilih.`;
-      break;
+      return false;
     default:
       techERR.innerText = ``;
+      return true;
   }
 }
 
@@ -82,14 +86,15 @@ function imageValid() {
   switch (true) {
     case !file:
       imageERR.innerText = `*Gambar belum dipilih.`;
-      break;
+      return false;
     case ![`image/jpeg`, `image/png`, `image/webp`].includes(file.type):
       imageERR.innerText = `*Format gambar harus JPG, PNG, atau WEBP.`;
-      break;
+      return false;
     case file.size > 2 * 1024 * 1024:
       imageERR.innerText = `*Ukuran gambar tidak boleh lebih dari 2MB.`;
-      break;
+      return false;
     default:
       imageERR.innerText = ``;
+      return true;
   }
 }
