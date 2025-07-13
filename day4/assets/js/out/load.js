@@ -1,7 +1,3 @@
-// ambil element wrapper
-const wrapper = document.querySelector(`.wrapper`);
-const form = document.querySelector(`.container form`);
-
 // tampilkan cards
 function loadProjects() {
   let index = 1;
@@ -104,7 +100,7 @@ function reindexProjects() {
 
 // otomatis focus ke id
 function scrollToSection(id) {
-  id.scrollIntoView();
+  id.scrollIntoView({ behavior: "smooth" });
   history.pushState(
     "",
     document.title,

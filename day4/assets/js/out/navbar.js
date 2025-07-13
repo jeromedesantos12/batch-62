@@ -1,11 +1,3 @@
-// ambil element
-const toggleMenu = document.querySelector(`.menu-toggle`);
-const toggleAnimate = document.querySelectorAll(`.menu-toggle span`);
-const miniMenu = document.querySelector(`.menu-mini`);
-const upElement = document.querySelector(`.add`);
-const header = document.querySelector(`#header`);
-const dropDown = document.querySelector(`#dropDown`);
-
 // buat scroll button -> cari isIntersecting (kondisinya true-false) dari array entries
 const observer = new IntersectionObserver((entries) =>
   entries.forEach((entry) =>

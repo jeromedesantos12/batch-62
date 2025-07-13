@@ -1,19 +1,3 @@
-// ambil input
-const name = document.querySelector(`#name`);
-const startDate = document.querySelector(`#startDate`);
-const endDate = document.querySelector(`#endDate`);
-const desc = document.querySelector(`#desc`);
-const tech = document.querySelectorAll(`input[name="tech"]`);
-const image = document.querySelector(`#image`);
-const submit = document.querySelector(`.submit`);
-
-// ambil span
-const projectNameERR = document.querySelector(`.name span`);
-const dateERR = document.querySelector(`.date span`);
-const descriptionERR = document.querySelector(`.desc span`);
-const techERR = document.querySelector(`.tech span`);
-const imageERR = document.querySelector(`.image span`);
-
 // event validasi
 name.addEventListener(`input`, nameValid);
 startDate.addEventListener(`input`, dateValid);

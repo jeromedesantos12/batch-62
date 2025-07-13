@@ -1,5 +1,3 @@
-const detail = document.querySelector(`.detail`);
-
 // event dari onclick -> tombol detail
 function detailProject(index) {
   let detailHTML = ``;
