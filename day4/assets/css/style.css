@@ -60,6 +60,7 @@ body {
 
 .pages {
   width: 70%;
+  max-width: 70em;
   height: 100%;
   background-color: #e6e6e6;
   overflow: scroll;
@@ -88,6 +89,7 @@ body {
 
 .page section .cover {
   width: 100%;
+  max-width: 50em;
   height: 25em;
   border-radius: 1em;
   background-size: cover;
@@ -104,6 +106,7 @@ body {
 }
 
 .page p {
+  width: 100%;
   line-height: 2em;
   white-space: pre-line;
   text-align: justify;
