@@ -6,12 +6,17 @@ submit.addEventListener(`click`, (e) => {
 
 // fungsi submit
 function handleSubmit() {
+  const file = image.files[0];
+
   // jalankan semua validasi
   const isNameValid = nameValid();
   const isDateValid = dateValid();
   const isDescValid = descriptionValid();
   const isTechValid = techValid();
-  const isImageValid = imageValid();
+  let isImageValid = true;
+
+  // jika src preview ada gambarnya, validasi image!
+  if (preview.src === ``) isImageValid = imageValid(file);
 
   // ambil data
   if (
@@ -30,46 +35,41 @@ function handleSubmit() {
       .filter((cb) => cb.checked)
       .map((cb) => cb.value);
 
-    // ambil file gambar dari input
-    const file = image.files[0]; // isinya nama file, tipe dan ukuran dalam byte.
-    const reader = new FileReader(); // membaca file secara lokal di browser
-
-    // event handler yang dijalankan setelah file selesai dibaca
-    reader.onload = function () {
-      const imgBase64 = reader.result; // hasil pembacaan berupa Base64 Data URL
-
-      let nextIndex = 1;
-      while (localStorage.getItem(`projectData-${nextIndex}`)) nextIndex++;
-      // Menarik semua item yang ada di localStorage (selama true dia looping terus)
-      // Misal:
-      // - projectData-1 → ✅ ada
-      // - projectData-2 → ❌ kosong
-      // - projectData-3 → ✅ ada
-
-      // - data baru isi di projectData-2 (yang kosong di key)
-      // - lalu data berikutnya longkap ke projectData-4
-
-      const projectData = {
-        name: name.value.trim(),
-        startDate: startDate.value,
-        endDate: endDate.value,
-        desc: desc.value.trim(),
-        tech: checkedTechs,
-        imgData: imgBase64,
-      };
-
-      // simpan + parsing ke json
-      localStorage.setItem(
-        `projectData-${nextIndex}`,
-        JSON.stringify(projectData)
-      );
-
-      alert(`✅ Data berhasil disimpan di localStorage`);
-      load(dropDown); // refresh
+    // data yang mau di kirim ke local storage
+    const projectData = {
+      name: name.value.trim(),
+      startDate: startDate.value,
+      endDate: endDate.value,
+      desc: desc.value.trim(),
+      tech: checkedTechs,
+      imgData: preview.src,
     };
 
-    reader.readAsDataURL(file);
-    // - Ini memicu proses konversi.
-    // - File diubah menjadi string yang dapat langsung digunakan
+    let index = 1;
+    while (localStorage.getItem(`projectData-${index}`)) index++;
+    // Menarik semua item yang ada di localStorage (selama true dia looping terus)
+    // Misal:
+    // - projectData-1 → ✅ ada
+    // - projectData-2 → ❌ kosong
+    // - projectData-3 → ✅ ada
+
+    // - data baru isi di projectData-2 (yang kosong di key)
+    // - lalu data berikutnya longkap ke projectData-4
+
+    if (editForm.checked) index = editForm.value;
+    // jika editForm checked, timpa index dengan editForm.value
+
+    localStorage.setItem(`projectData-${index}`, JSON.stringify(projectData));
+
+    // kembali default
+    preview.src = ``;
+    preview.classList.remove(`active`);
+    title.textContent = `ADD MY PROJECT`;
+    submit.textContent = `submit`;
+    editForm.checked = false;
+    editForm.value = ``;
+
+    alert(`✅ Data berhasil disimpan di localStorage`);
+    load(dropDown); // refresh
   }
 }

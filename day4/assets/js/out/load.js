@@ -50,15 +50,15 @@ function loadProjects() {
     // [</span>(element icon)</span>, ... ]  -> hasil looping (array di join)
 
     allCardsHTML += `
-      <div class="cards">
-        <div class="cover" style="background-image: url(${imgDataIN});"></div>
+      <div class="cards" onclick="detailProject(event)" data-index="${index}">
+        <img class="cover" src= "${imgDataIN}" alt="${nameIN}"/>
         <h2>${nameIN}</h2>
         <span>durasi ${monthsIN} bulan</span>
         <p class="truncate">${descIN}</p>
         <div class="techs">${techSpan}</div>
         <div class="buttons">
-          <button onclick="detailProject(${index})">Detail</button>
-          <button onclick="deleteProject(${index})">Delete</button>
+          <button class="edit" onclick="editProject(event)" data-index="${index}">Edit</button>
+          <button class="delete" onclick="deleteProject(event)" data-index="${index}">Delete</button>
         </div>
       </div>
     `;

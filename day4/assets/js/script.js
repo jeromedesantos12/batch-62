@@ -24,5 +24,8 @@ const dropDown = document.querySelector(`#dropDown`);
 const wrapper = document.querySelector(`.wrapper`);
 const form = document.querySelector(`.container form`);
 
-// card.js
+// crud.js
+const title = document.querySelector(`.container h1`);
 const detail = document.querySelector(`.detail`);
+const editForm = document.querySelector(`input[name="edit"]`);
+const preview = document.querySelector(`#preview`);

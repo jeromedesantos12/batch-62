@@ -1,6 +1,21 @@
-// event dari onclick -> tombol detail
-function detailProject(index) {
+// editButton.addEventListener(`click`, (e) => {
+//   e.stopPropagation();
+//   editProject(e.currentTarget.dataset.index);
+// });
+
+// deleteButton.addEventListener(`click`, (e) => {
+//   e.stopPropagation();
+//   deleteProject(e.currentTarget.dataset.index);
+// });
+
+// cards.addEventListener(`click`, (e) =>
+//   detailProject(e.currentTarget.dataset.index)
+// );
+
+function detailProject(e) {
   let detailHTML = ``;
+
+  const index = e.currentTarget.dataset.index;
   const key = `projectData-${index}`;
   const savedProject = localStorage.getItem(key);
 
@@ -9,13 +24,14 @@ function detailProject(index) {
     project = JSON.parse(savedProject);
   } catch (err) {
     console.error(`💥 Gagal parsing ${key}:`, err.message);
+    return;
   }
 
   const { nameIN, descIN, imgDataIN, startDateIN, endDateIN, techIN } =
     getData(project);
 
   function formatDate(date) {
-    const [year, month, day] = date.toISOString().slice(0, 10).split(`-`);
+    const [year, month, day] = date.toISOString().split("T")[0].split(`-`);
     const monthNames = [
       `Jan`,
       `Feb`,
@@ -85,8 +101,10 @@ function closeProject() {
   detail.classList.remove(`active`);
 }
 
-// event dari onclick -> tombol delete
-function deleteProject(index) {
+function deleteProject(e) {
+  e.stopPropagation();
+
+  const index = e.currentTarget.dataset.index;
   const key = `projectData-${index}`;
 
   const confirmDelete = confirm(`Yakin mau hapus Project?`);
@@ -94,4 +112,38 @@ function deleteProject(index) {
 
   localStorage.removeItem(key); // hapus dari localStorage
   load(dropDown); // refresh
+}
+
+function editProject(e) {
+  e.stopPropagation();
+
+  const index = e.currentTarget.dataset.index;
+  const key = `projectData-${index}`;
+
+  const savedProject = localStorage.getItem(key);
+
+  let project;
+  try {
+    project = JSON.parse(savedProject);
+  } catch (err) {
+    console.error(`💥 Gagal parsing ${key}:`, err.message);
+    return;
+  }
+
+  const { nameIN, descIN, imgDataIN, startDateIN, endDateIN, techIN } =
+    getData(project);
+
+  name.value = nameIN;
+  desc.value = descIN;
+  preview.src = imgDataIN;
+  preview.classList.add(`active`);
+  startDate.value = startDateIN.toISOString().split("T")[0];
+  endDate.value = endDateIN.toISOString().split("T")[0];
+  tech.value = tech.forEach((tc) => (tc.checked = techIN.includes(tc.value)));
+
+  title.textContent = `EDIT PROJECT ${index}`;
+  submit.textContent = `update`;
+  scrollToSection(header);
+  editForm.checked = true;
+  editForm.value = index;
 }

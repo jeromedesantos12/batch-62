@@ -4,7 +4,10 @@ startDate.addEventListener(`input`, dateValid);
 endDate.addEventListener(`input`, dateValid);
 desc.addEventListener(`input`, descriptionValid);
 tech.forEach((tc) => tc.addEventListener(`click`, techValid));
-image.addEventListener(`change`, imageValid);
+image.addEventListener(`change`, () => {
+  const file = image.files[0]; // isinya nama file, tipe dan ukuran dalam byte.
+  if (imageValid(file)) imagePreview(file);
+});
 
 // validasi nama
 function nameValid() {
@@ -81,8 +84,7 @@ function techValid() {
 }
 
 // validasi gambar
-function imageValid() {
-  const file = image.files[0];
+function imageValid(file) {
   switch (true) {
     case !file:
       imageERR.innerText = `*Gambar belum dipilih.`;
@@ -97,4 +99,13 @@ function imageValid() {
       imageERR.innerText = ``;
       return true;
   }
+}
+
+function imagePreview(file) {
+  preview.classList.add(`active`);
+  const reader = new FileReader(); // membaca file secara lokal di browser
+
+  // event handler yang dijalankan setelah file selesai dibaca
+  reader.onload = () => (preview.src = reader.result); // hasil pembacaan berupa Base64 Data URL
+  reader.readAsDataURL(file); // fungsi dijalankan
 }

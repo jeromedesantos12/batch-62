@@ -10,6 +10,15 @@ body {
   flex-direction: column;
 }
 
+img[alt="logo"] {
+  filter: brightness(100%);
+  transition: all 0.5s ease;
+}
+
+img[alt="logo"]:hover {
+  filter: brightness(150%);
+}
+
 .menu-toggle {
   height: 2em;
   display: grid;
@@ -25,6 +34,9 @@ body {
   border-radius: 1em;
   transition: all 0.5s ease;
 }
+.menu-toggle:hover span {
+  transform: scale(1.05);
+}
 
 .menu-toggle span.active:nth-child(1) {
   transform: rotate(45deg);
@@ -33,7 +45,6 @@ body {
 }
 
 .menu-toggle span.active:nth-child(2) {
-  opacity: 0;
   display: none;
 }
 
@@ -60,11 +71,13 @@ body {
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
   transition: all 1s ease;
   transform: translateX(100%);
+  visibility: hidden;
   opacity: 0;
 }
 
 .menu-mini.active {
   opacity: 1;
+  visibility: visible;
   transform: translateX(0);
 }
 
@@ -77,10 +90,6 @@ body {
 
 .menu-mini a:hover {
   color: #868686;
-}
-
-.menu-mini a:active {
-  font-weight: 500;
 }
 
 .menubar {
@@ -259,6 +268,7 @@ p {
 
   .menu-mini.active {
     opacity: 0;
+    visibility: hidden;
     transform: translateX(100%);
   }
 
@@ -276,10 +286,6 @@ p {
 
   .menubar nav a:hover {
     color: #868686;
-  }
-
-  .menubar nav a:active {
-    font-weight: 500;
   }
 
   .menubar nav a:nth-child(3n) {

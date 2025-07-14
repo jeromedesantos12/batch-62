@@ -21,7 +21,7 @@
 
     <!-- db -->
     <script src="assets/js/db/get.js" defer></script>
-    <script src="assets/js/db/card.js" defer></script>
+    <script src="assets/js/db/crud.js" defer></script>
 
     <!-- out -->
     <script src="assets/js/out/load.js" defer></script>
@@ -60,8 +60,10 @@
     </div>
 
     <!-- isi konten -->
+    <input type="checkbox" name="edit" value="" />
     <div class="container">
       <h1>ADD MY PROJECT</h1>
+      <h2></h2>
       <form action="#" method="post">
         <div class="name">
           <label name="name" for="name">Project Name</label>
@@ -130,6 +132,7 @@
           <label for="image">Upload Image</label>
           <input type="file" id="image" accept="image/*" />
           <span></span>
+          <img alt="preview" id="preview" />
         </div>
 
         <button class="submit" type="submit">submit</button>
