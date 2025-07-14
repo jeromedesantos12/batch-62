@@ -13,10 +13,7 @@ function handleSubmit() {
   const isDateValid = dateValid();
   const isDescValid = descriptionValid();
   const isTechValid = techValid();
-  let isImageValid = true;
-
-  // jika src preview ada gambarnya, validasi image!
-  if (preview.src === ``) isImageValid = imageValid(file);
+  const isImageValid = imageValid(file);
 
   // ambil data
   if (

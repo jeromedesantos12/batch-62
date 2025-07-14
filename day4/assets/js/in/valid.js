@@ -6,7 +6,13 @@ desc.addEventListener(`input`, descriptionValid);
 tech.forEach((tc) => tc.addEventListener(`click`, techValid));
 image.addEventListener(`change`, () => {
   const file = image.files[0]; // isinya nama file, tipe dan ukuran dalam byte.
-  if (imageValid(file)) imagePreview(file);
+  if (imageValid(file)) {
+    preview.classList.add(`active`);
+    imagePreview(file);
+  } else {
+    preview.src = ``;
+    preview.classList.remove(`active`);
+  }
 });
 
 // validasi nama
@@ -87,8 +93,12 @@ function techValid() {
 function imageValid(file) {
   switch (true) {
     case !file:
-      imageERR.innerText = `*Gambar belum dipilih.`;
-      return false;
+      if (editForm.checked) {
+        return true;
+      } else {
+        imageERR.innerText = `*Gambar belum dipilih.`;
+        return false;
+      }
     case ![`image/jpeg`, `image/png`, `image/webp`].includes(file.type):
       imageERR.innerText = `*Format gambar harus JPG, PNG, atau WEBP.`;
       return false;

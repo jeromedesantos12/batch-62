@@ -6,15 +6,15 @@ const dataTech = {
   laravel: [`Laravel`, `<i class="fa-brands fa-laravel"></i>`],
 };
 
-// ambil data dari local storage
-function getData(storage) {
+// ambil data dari local project
+function getData(project) {
   // simpan masing-masing value ke variable
-  const nameIN = storage.name;
-  const descIN = storage.desc;
-  const techIN = storage.tech;
-  const imgDataIN = storage.imgData;
-  const startDateIN = new Date(storage.startDate);
-  const endDateIN = new Date(storage.endDate);
+  const nameIN = project.name;
+  const descIN = project.desc;
+  const techIN = project.tech;
+  const imgDataIN = project.imgData;
+  const startDateIN = new Date(project.startDate);
+  const endDateIN = new Date(project.endDate);
 
   return { nameIN, descIN, imgDataIN, startDateIN, endDateIN, techIN };
 }

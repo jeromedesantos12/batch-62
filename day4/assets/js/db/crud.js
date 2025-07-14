@@ -1,17 +1,3 @@
-// editButton.addEventListener(`click`, (e) => {
-//   e.stopPropagation();
-//   editProject(e.currentTarget.dataset.index);
-// });
-
-// deleteButton.addEventListener(`click`, (e) => {
-//   e.stopPropagation();
-//   deleteProject(e.currentTarget.dataset.index);
-// });
-
-// cards.addEventListener(`click`, (e) =>
-//   detailProject(e.currentTarget.dataset.index)
-// );
-
 function detailProject(e) {
   let detailHTML = ``;
 
