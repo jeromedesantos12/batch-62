@@ -1,4 +1,6 @@
-const express = require("express"); // node manggil express
+// const express = require("express"); // node manggil express
+import express from "express"; // node manggil express (ES6)
+
 const app = express(); // manggil fungsi express
 const port = 3000; // port 3000
 

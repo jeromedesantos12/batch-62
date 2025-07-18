@@ -149,7 +149,6 @@ p {
 }
 
 .tombol-contact {
-  width: 100%;
   max-width: 10em;
   margin-bottom: 1em;
   color: #ffff;
@@ -230,7 +229,6 @@ p {
 }
 
 .profile {
-  width: 100%;
   max-width: 250px;
   border-radius: 1em;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
@@ -254,7 +252,6 @@ p {
   }
 
   .container {
-    width: 100%;
     max-width: 900px;
     padding: 3em;
     flex-direction: row;
