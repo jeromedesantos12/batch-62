@@ -76,6 +76,4 @@ Proyek ini dibuat untuk:
 - Eksperimen join, foreign key, dan schema PostgreSQL
 - Menjadi fondasi game RPG berbasis data atau API
 
-#### 🌟 Credits
-
-##### Made with curiosity and magic by Jeremy 🧙✨ Powered by PostgreSQL
+#### Made with curiosity and magic by Jeremy 🧙✨ Powered by PostgreSQL
