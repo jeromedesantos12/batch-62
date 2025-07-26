@@ -4,17 +4,35 @@ const miniMenu = document.querySelector(`.menu-mini`);
 const upElement = document.querySelector(`.add`);
 const header = document.querySelector(`#header`);
 const dropDown = document.querySelector(`#dropDown`);
+const cards = document.querySelectorAll(`.cards`);
 const editButton = document.querySelectorAll(`.edit`);
+const deleteButton = document.querySelectorAll(`.delete`);
 
 // event
 toggleMenu.addEventListener(`click`, toggle);
 upElement.addEventListener(`click`, up);
-if (editButton)
-  editButton.forEach((btn) => btn.addEventListener(`click`, editMethod));
+if (cards) {
+  cards.forEach((btn) => btn.addEventListener(`click`, detailProject));
+  editButton.forEach((btn) => btn.addEventListener(`click`, editProject));
+  deleteButton.forEach((btn) => btn.addEventListener(`click`, deleteProject));
+}
 
-function editMethod(e) {
-  const no = e.target.dataset.index;
+function detailProject(e) {
+  const no = e.currentTarget.dataset.index;
+  console.log("no", no);
+  window.location.href = `/detail/${no}`;
+}
+
+function editProject(e) {
+  e.stopPropagation();
+  const no = e.currentTarget.dataset.index;
   window.location.href = `/edit/${no}`;
+}
+
+function deleteProject(e) {
+  e.stopPropagation();
+  const confirmDelete = confirm(`Yakin mau hapus Project?`);
+  if (!confirmDelete) e.preventDefault();
 }
 
 function toggle() {

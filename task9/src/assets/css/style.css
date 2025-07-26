@@ -25,60 +25,12 @@ img[alt="logo"]:hover {
   top: 0;
 }
 
-.detail {
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 3;
-  display: flex;
-  gap: 2em;
-  justify-content: center;
-  overflow: scroll;
-  transition: all 0.5s ease;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(100%);
-}
-
-.detail.active {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.close.bi.bi-x {
-  font-size: 2em;
-}
-
-.close {
-  width: 1em;
-  height: 1em;
-  color: #ffff;
-  border: 0.1em solid #ffff;
-  border-radius: 100%;
-  cursor: pointer;
-  transition: all 0.5s ease;
-  margin-top: 0.5em;
-}
-
-.close:hover {
-  border: 0.1em solid #868686;
-  color: #868686;
-  transform: scale(1.1);
-}
-
 .pages {
-  width: 70%;
-  max-width: 70em;
-  height: 100%;
+  width: 100%;
   background-color: #e6e6e6;
-  overflow: scroll;
-  padding: 5em 5em;
   box-sizing: border-box;
-  border: 5px solid black;
+  display: flex;
+  justify-content: center;
 }
 
 .page {
@@ -86,6 +38,8 @@ img[alt="logo"]:hover {
   flex-direction: column;
   align-items: center;
   gap: 2em;
+  padding-bottom: 5em;
+  flex: 1;
 }
 
 .page h1 {
@@ -100,7 +54,6 @@ img[alt="logo"]:hover {
 }
 
 .page section .cover {
-  width: 100%;
   max-width: 50em;
   height: 25em;
   border-radius: 1em;
@@ -408,7 +361,6 @@ input[type="file"]::file-selector-button:hover {
 }
 
 #preview {
-  width: 100%;
   max-width: 10em;
   height: 10em;
   border-radius: 1em;
@@ -425,7 +377,6 @@ input[type="file"]::file-selector-button:hover {
 .submit {
   margin: 2em 0;
   align-self: end;
-  width: 100%;
   max-width: 8em;
   color: #ffff;
   background-color: #000000;
@@ -476,7 +427,6 @@ input[type="file"]::file-selector-button:hover {
   display: flex;
   flex-direction: column;
   gap: 1.2em;
-  cursor: pointer;
   transition: all 0.5s ease;
 }
 
@@ -549,6 +499,7 @@ input[type="file"]::file-selector-button:hover {
   font-weight: 500;
   font-family: inherit;
   transition: all 0.5s ease;
+  cursor: pointer;
 }
 
 .cards .buttons form {
@@ -562,9 +513,12 @@ input[type="file"]::file-selector-button:hover {
 
 @media (min-width: 768px) {
   .container {
-    width: 100%;
     max-width: 500px;
     padding: 0 2em 2em;
+  }
+
+  .page {
+    max-width: 1000px;
   }
 
   .menu-toggle {

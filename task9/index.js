@@ -63,6 +63,7 @@ app.use(express.urlencoded({ extended: false })); // baca data dari form POST
 app.get(`/`, home);
 app.get(`/edit/:id`, edit);
 app.get(`/detail/:id`, detail);
+app.get(`*catchall`, (req, res) => res.send(`Page not found`)); // path -> about, foo/bar
 
 // route handle data
 app.post(`/`, upload.single(`img`), handleHome);
@@ -134,7 +135,6 @@ async function home(req, res) {
   }
 }
 
-// get (async)
 async function edit(req, res) {
   try {
     const { id } = req.params;
@@ -168,8 +168,27 @@ async function edit(req, res) {
   }
 }
 
-async function detail(res, req) {
+async function detail(req, res) {
   try {
+    function formatDate(date) {
+      const [year, month, day] = date.toISOString().split("T")[0].split(`-`);
+      const monthNames = [
+        `Jan`,
+        `Feb`,
+        `Mar`,
+        `Apr`,
+        `May`,
+        `Jun`,
+        `Jul`,
+        `Aug`,
+        `Sept`,
+        `Oct`,
+        `Nov`,
+        `Dec`,
+      ];
+      return `${day} ${monthNames[parseInt(month) - 1]} ${year}`;
+    }
+
     const techSpan = {
       js: {
         name: `JavaScript`,
@@ -188,6 +207,7 @@ async function detail(res, req) {
         icon: `fa-laravel`,
       },
     };
+
     const { id } = req.params;
     const [
       {
@@ -204,19 +224,24 @@ async function detail(res, req) {
         [id]
       )
     ).rows;
+
     const row = {
       id,
       name_project,
-      start: new Date(date_start).toISOString().split(`T`)[0],
-      end: new Date(date_end).toISOString().split(`T`)[0],
+      start: formatDate(date_start),
+      end: formatDate(date_end),
       month:
         (date_end.getFullYear() - date_start.getFullYear()) * 12 +
         (date_end.getMonth() - date_start.getMonth()),
       description,
-      tech: technologies.split(`,`).map((t) => techSpan[t.toLowerCase()].icon),
       image_filename,
-    };
-    res.render(`index`, { row });
+      tech: technologies
+        .split(`,`) // pisahkan dengan koma [ js, react, php, laravel ]
+        .map((t) => techSpan[t.trim().toLowerCase()])
+        // buang spasi, konversi huruf kecil -> lalu bandingkan dengana techSpan
+        .filter(Boolean), // skip data null
+    }; // [{ name: "React JS", icon: "fa-react" }]
+    res.render(`detail`, { row });
   } catch (err) {
     console.log(`ErrorGET_detail: ${err}`);
   }

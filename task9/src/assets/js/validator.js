@@ -92,7 +92,7 @@ function descValid() {
       descERR.innerText = `*Deskripsi harus minimal 10 karakter.`;
       desc.classList.add(`err`);
       return false;
-    case desc.value.length > 2000:
+    case desc.value.length > 10000:
       descERR.innerText = `*Deskripsi tidak boleh lebih dari 2000 karakter.`;
       desc.classList.add(`err`);
       return false;
@@ -174,7 +174,6 @@ function handleSubmit(e) {
     !isDescValid ||
     !isTechValid ||
     !isImageValid
-  ) {
+  )
     e.preventDefault();
-  }
 }

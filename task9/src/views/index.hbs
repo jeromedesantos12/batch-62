@@ -20,7 +20,6 @@
   <body>
     <!-- scroll atas -->
     <div id="header"></div>
-    <div class="detail"></div>
     <div class="add bi bi-plus"></div>
     <!-- bagian menu -->
     <div class="menubar">
@@ -44,11 +43,11 @@
 
     <!-- isi konten -->
     <input type="checkbox" name="edit" value="{{row.id}}" 
-    {{#if row.id}}checked{{/if}} 
+    {{#if row}}checked{{/if}} 
     /> 
     <div class="container">
-      <h1>{{#if (not row.id)}}ADD MY PROJECT{{else}}EDIT PROJECT {{row.id}}{{/if}}</h1>
-      <form action="{{#if (not row.id)}}/{{else}}/edit/{{row.id}}{{/if}}"
+      <h1>{{#if (not row)}}ADD MY PROJECT{{else}}EDIT PROJECT {{row.id}}{{/if}}</h1>
+      <form action="{{#if (not row)}}/{{else}}/edit/{{row.id}}{{/if}}"
        method="POST" enctype="multipart/form-data">
         <div class="name">
           <label for="name">Project Name</label>
@@ -149,12 +148,12 @@
             class="{{#if row.image_filename}}active{{/if}}"
           />
         </div>
-        <button class="submit" type="submit">{{#if (not row.id)}}submit{{else}}update{{/if}}</button>
+        <button class="submit" type="submit">{{#if (not row)}}submit{{else}}update{{/if}}</button>
       </form>
     </div>
 
     <!-- scroll bawah -->
-    <div id="dropDown">
+    <div id="dropDown" style="{{#if (not row)}}display:block;{{else}}display:none;{{/if}}">
       <h1>MY PROJECT</h1>
       <div class="wrapper">
         {{#if (isEmpty sanitizeRows)}}
@@ -163,7 +162,6 @@
           {{#each sanitizeRows}}
             <div
               class="cards"
-              {{!-- onclick="detailProject(event)" --}}
               data-index="{{this.no}}"
             >
               <img
@@ -175,7 +173,7 @@
               <span>durasi {{this.month}} bulan</span>
               <p class="truncate">{{this.description}}</p>
               <div class="techs">
-                {{#each techUpd}}
+                {{#each this.techUpd}}
                   <i class="fa-brands {{this}}"></i>
                 {{/each}}
               </div>
