@@ -2,14 +2,14 @@
 import express from "express";
 import multer from "multer";
 import hbs from "hbs";
-import mime from "mime-types";
-import pg from "pg";
+import fs from "fs/promises";
 import path from "path";
-import * as fs from "fs/promises";
+import { Pool } from "pg";
+import { extension } from "mime-types";
 import { fileURLToPath } from "url";
 
 // inisiasi db
-const db = new pg.Pool({
+const db = new Pool({
   user: `jeremy`,
   password: `123`,
   host: `localhost`,
@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, `src`, `assets`, `uploads`)),
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + `-` + Math.round(Math.random() * 1e9);
-    const ext = mime.extension(file.mimetype);
+    const ext = extension(file.mimetype);
     cb(null, file.fieldname + `-` + uniqueSuffix + `.` + ext);
   },
 });
@@ -62,6 +62,7 @@ app.use(express.urlencoded({ extended: false })); // baca data dari form POST
 // route render
 app.get(`/`, home);
 app.get(`/edit/:id`, edit);
+app.get(`/detail/:id`, detail);
 
 // route handle data
 app.post(`/`, upload.single(`img`), handleHome);
@@ -112,7 +113,7 @@ async function home(req, res) {
         (date_end.getMonth() - date_start.getMonth());
       const techUpd = technologies
         .split(`,`)
-        .map((techno) => techSpan[techno.toLowerCase()].icon);
+        .map((t) => techSpan[t.toLowerCase()].icon);
 
       return {
         no,
@@ -125,7 +126,6 @@ async function home(req, res) {
         image_filename,
       };
     });
-    console.log(rows.length);
     if (rows.length === 0)
       await db.query(`ALTER SEQUENCE project_no_seq RESTART WITH 1;`);
     res.render(`index`, { sanitizeRows });
@@ -165,6 +165,60 @@ async function edit(req, res) {
     res.render(`index`, { row });
   } catch (err) {
     console.log(`ErrorGET_edit: ${err}`);
+  }
+}
+
+async function detail(res, req) {
+  try {
+    const techSpan = {
+      js: {
+        name: `JavaScript`,
+        icon: `fa-square-js`,
+      },
+      react: {
+        name: `React JS`,
+        icon: `fa-react`,
+      },
+      php: {
+        name: `PHP`,
+        icon: `fa-php`,
+      },
+      laravel: {
+        name: `Laravel`,
+        icon: `fa-laravel`,
+      },
+    };
+    const { id } = req.params;
+    const [
+      {
+        name_project,
+        date_start,
+        date_end,
+        description,
+        technologies,
+        image_filename,
+      },
+    ] = (
+      await db.query(
+        `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
+        [id]
+      )
+    ).rows;
+    const row = {
+      id,
+      name_project,
+      start: new Date(date_start).toISOString().split(`T`)[0],
+      end: new Date(date_end).toISOString().split(`T`)[0],
+      month:
+        (date_end.getFullYear() - date_start.getFullYear()) * 12 +
+        (date_end.getMonth() - date_start.getMonth()),
+      description,
+      tech: technologies.split(`,`).map((t) => techSpan[t.toLowerCase()].icon),
+      image_filename,
+    };
+    res.render(`index`, { row });
+  } catch (err) {
+    console.log(`ErrorGET_detail: ${err}`);
   }
 }
 

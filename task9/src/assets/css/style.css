@@ -321,6 +321,8 @@ form {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  box-sizing: border-box;
+  padding: 0.1em;
   gap: 2em;
   flex-wrap: wrap;
 }
