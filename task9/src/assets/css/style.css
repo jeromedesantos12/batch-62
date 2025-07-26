@@ -298,7 +298,7 @@ img[alt="logo"]:hover {
 }
 
 input[name="edit"] {
-  /* display: none; */
+  display: none;
 }
 
 h1 {
@@ -361,6 +361,11 @@ form span {
   color: #868686;
 }
 
+.err {
+  color: #dc3545;
+  outline: 0.1em solid #dc3545;
+}
+
 input,
 textarea {
   display: inline-block;
@@ -369,6 +374,7 @@ textarea {
   border-radius: 0.5em;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
   border: none;
+  outline: none;
 }
 
 textarea {

@@ -43,25 +43,28 @@ const observer = new IntersectionObserver((entries) =>
 observer.observe(header); // focus ke header
 
 // 2. VALIDASI
+const editForm = document.querySelector(`input[name="edit"]`);
 const name = document.querySelector(`#name`);
-const startDate = document.querySelector(`#start`);
-const endDate = document.querySelector(`#end`);
+const start = document.querySelector(`#start`);
+const end = document.querySelector(`#end`);
 const desc = document.querySelector(`#desc`);
 const tech = document.querySelectorAll(`input[name="tech"]`);
 const img = document.querySelector(`#img`);
 const submit = document.querySelector(`.submit`);
-const projectNameERR = document.querySelector(`.name span`);
+const nameERR = document.querySelector(`.name span`);
 const dateERR = document.querySelector(`.date span`);
-const descriptionERR = document.querySelector(`.desc span`);
+const descERR = document.querySelector(`.desc span`);
 const techERR = document.querySelector(`.tech span`);
 const imgERR = document.querySelector(`.img span`);
 
 // event validasi
 name.addEventListener(`input`, nameValid);
-startDate.addEventListener(`input`, dateValid);
-endDate.addEventListener(`input`, dateValid);
-desc.addEventListener(`input`, descriptionValid);
+start.addEventListener(`input`, dateValid);
+end.addEventListener(`input`, dateValid);
+desc.addEventListener(`input`, descValid);
 tech.forEach((tc) => tc.addEventListener(`click`, techValid));
+submit.addEventListener(`click`, (e) => handleSubmit(e));
+
 img.addEventListener(`change`, () => {
   const file = img.files[0]; // isinya nama file, tipe dan ukuran dalam byte.
   if (imgValid(file)) {
@@ -77,53 +80,70 @@ img.addEventListener(`change`, () => {
 function nameValid() {
   switch (true) {
     case !name.value:
-      projectNameERR.innerText = `*Nama Project tidak boleh kosong!`;
+      nameERR.innerText = `*Nama Project tidak boleh kosong!`;
+      name.classList.add(`err`);
       return false;
     case !/^[a-zA-Z\s]+$/.test(name.value):
-      projectNameERR.innerText = `*Nama Project hanya boleh berisi huruf dan spasi!`;
+      nameERR.innerText = `*Nama Project hanya boleh berisi huruf dan spasi!`;
+      name.classList.add(`err`);
       return false;
     case name.value.trim().length < 2:
-      projectNameERR.innerText = `*Nama Project terlalu pendek!`;
+      nameERR.innerText = `*Nama Project terlalu pendek!`;
+      name.classList.add(`err`);
       return false;
     case name.value.trim().length > 99:
-      projectNameERR.innerText = `*Nama Project terlalu panjang!`;
+      nameERR.innerText = `*Nama Project terlalu panjang!`;
+      name.classList.add(`err`);
       return false;
     default:
-      projectNameERR.innerText = ``;
+      nameERR.innerText = ``;
+      name.classList.remove(`err`);
       return true;
   }
 }
 
 function dateValid() {
   switch (true) {
-    case !startDate.value || !endDate.value:
+    case !start.value || !end.value:
       dateERR.innerText = `*Tanggal mulai dan/atau tanggal akhir belum dipilih.`;
+      start.classList.add(`err`);
+      end.classList.add(`err`);
       return false;
-    case startDate.value > endDate.value:
+    case start.value > end.value:
       dateERR.innerText = `*Tanggal mulai tidak boleh lebih besar dari tanggal akhir.`;
+      start.classList.add(`err`);
+      end.classList.add(`err`);
       return false;
-    case startDate.value === endDate.value:
+    case start.value === end.value:
       dateERR.innerText = `*Tanggal mulai dan tanggal akhir tidak boleh sama.`;
+      start.classList.add(`err`);
+      end.classList.add(`err`);
       return false;
     default:
       dateERR.innerText = ``;
+      start.classList.remove(`err`);
+      end.classList.remove(`err`);
       return true;
   }
 }
 
-function descriptionValid() {
+function descValid() {
   switch (true) {
     case desc.value.length === 0:
-      descriptionERR.innerText = `*Deskripsi tidak boleh kosong.`;
+      descERR.innerText = `*Deskripsi tidak boleh kosong.`;
+      desc.classList.add(`err`);
       return false;
     case desc.value.length < 10:
-      descriptionERR.innerText = `*Deskripsi harus minimal 10 karakter.`;
+      descERR.innerText = `*Deskripsi harus minimal 10 karakter.`;
+      desc.classList.add(`err`);
       return false;
     case desc.value.length > 2000:
-      descriptionERR.innerText = `*Deskripsi tidak boleh lebih dari 2000 karakter.`;
+      descERR.innerText = `*Deskripsi tidak boleh lebih dari 2000 karakter.`;
+      desc.classList.add(`err`);
       return false;
     default:
-      descriptionERR.innerText = ``;
+      descERR.innerText = ``;
+      desc.classList.remove(`err`);
       return true;
   }
 }
@@ -151,19 +171,24 @@ function imgValid(file) {
   switch (true) {
     case !file:
       if (editForm.checked) {
+        img.classList.remove(`err`);
         return true;
       } else {
         imgERR.innerText = `*Gambar belum dipilih.`;
+        img.classList.add(`err`);
         return false;
       }
     case ![`image/jpeg`, `image/png`, `image/webp`].includes(file.type):
       imgERR.innerText = `*Format gambar harus JPG, PNG, atau WEBP.`;
+      img.classList.add(`err`);
       return false;
     case file.size > 2 * 1024 * 1024:
       imgERR.innerText = `*Ukuran gambar tidak boleh lebih dari 2MB.`;
+      img.classList.add(`err`);
       return false;
     default:
       imgERR.innerText = ``;
+      img.classList.remove(`err`);
       return true;
   }
 }
@@ -175,4 +200,26 @@ function imgPreview(file) {
   // event handler yang dijalankan setelah file selesai dibaca
   reader.onload = () => (preview.src = reader.result); // hasil pembacaan berupa Base64 Data URL
   reader.readAsDataURL(file); // fungsi dijalankan
+}
+
+function handleSubmit(e) {
+  const file = img.files[0];
+
+  // jalankan semua validasi
+  const isNameValid = nameValid();
+  const isDateValid = dateValid();
+  const isDescValid = descValid();
+  const isTechValid = techValid();
+  const isImageValid = imgValid(file);
+
+  // ambil data
+  if (
+    !isNameValid ||
+    !isDateValid ||
+    !isDescValid ||
+    !isTechValid ||
+    !isImageValid
+  ) {
+    e.preventDefault();
+  }
 }

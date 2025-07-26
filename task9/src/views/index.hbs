@@ -42,9 +42,9 @@
     </div>
 
     <!-- isi konten -->
-    {{!-- <input type="checkbox" name="edit" value="{{row.id}}" 
+    <input type="checkbox" name="edit" value="{{row.id}}" 
     {{#if row.id}}checked{{/if}} 
-    />  --}}
+    /> 
     <div class="container">
       <h1>{{#if (not row.id)}}ADD MY PROJECT{{else}}EDIT PROJECT {{row.id}}{{/if}}</h1>
       <form action="{{#if (not row.id)}}/{{else}}/edit/{{row.id}}{{/if}}"

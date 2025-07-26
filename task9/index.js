@@ -21,35 +21,42 @@ const db = new pg.Pool({
 // inisialisasi express
 const app = express();
 const port = 3000;
+
+// inisialisasi fileURLToPath
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// inisialisasi multer
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, `./src/assets/uploads`),
+  destination: (req, file, cb) =>
+    cb(null, path.join(__dirname, `src`, `assets`, `uploads`)),
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const uniqueSuffix = Date.now() + `-` + Math.round(Math.random() * 1e9);
     const ext = mime.extension(file.mimetype);
-    cb(null, file.fieldname + "-" + uniqueSuffix + "." + ext);
+    cb(null, file.fieldname + `-` + uniqueSuffix + `.` + ext);
   },
 });
 const upload = multer({ storage });
 
 // inisialisasi logika hbs
-hbs.registerHelper("json", (context) => JSON.stringify(context, null, 2));
-hbs.registerHelper("not", (value) => !value);
+hbs.registerHelper(`json`, (context) => JSON.stringify(context, null, 2));
+hbs.registerHelper(`not`, (value) => !value);
 hbs.registerHelper(
-  "includes",
+  `includes`,
   (arr, val) => Array.isArray(arr) && arr.includes(val)
 );
-hbs.registerHelper("isEmpty", (val) => {
+hbs.registerHelper(`isEmpty`, (val) => {
   if (Array.isArray(val)) return val.length === 0;
-  if (typeof val === "string") return val.trim() === "";
+  if (typeof val === `string`) return val.trim() === ``;
   if (val == null) return true;
-  if (typeof val === "object") return Object.keys(val).length === 0;
+  if (typeof val === `object`) return Object.keys(val).length === 0;
   return false;
 }); //  <pre>{{{json this.no}}}</pre>
 
 // inisialisasi hbs
 app.set(`view engine`, `hbs`); // pakai Handlebars engine
 app.set(`views`, `./src/views`); // lokasi folder views
-app.use(`/assets`, express.static(`./src/assets`)); // path untuk file statis
+app.use(`/assets`, express.static(path.join(__dirname, `src`, `assets`))); // path untuk file statis
 app.use(express.urlencoded({ extended: false })); // baca data dari form POST
 
 // route render
@@ -104,7 +111,7 @@ async function home(req, res) {
         (date_end.getFullYear() - date_start.getFullYear()) * 12 +
         (date_end.getMonth() - date_start.getMonth());
       const techUpd = technologies
-        .split(",")
+        .split(`,`)
         .map((techno) => techSpan[techno.toLowerCase()].icon);
 
       return {
@@ -152,7 +159,7 @@ async function edit(req, res) {
       start: new Date(date_start).toISOString().split(`T`)[0],
       end: new Date(date_end).toISOString().split(`T`)[0],
       description,
-      tech: technologies.split(",").map((t) => t.trim()),
+      tech: technologies.split(`,`).map((t) => t.trim()),
       image_filename,
     };
     res.render(`index`, { row });
@@ -223,16 +230,9 @@ async function handleDelete(req, res) {
       )
     ).rows;
     await db.query(`DELETE FROM public.project WHERE no = $1;`, [id]);
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const imagePath = path.join(
-      __dirname,
-      "src",
-      "assets",
-      "uploads",
-      image_filename
+    await fs.unlink(
+      path.join(__dirname, `src`, `assets`, `uploads`, image_filename)
     );
-    await fs.unlink(imagePath);
   } catch (err) {
     console.log(`ErrorPOST_delete: ${err}`);
   }
