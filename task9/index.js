@@ -40,6 +40,7 @@ const upload = multer({ storage });
 
 // inisialisasi logika hbs
 hbs.registerHelper(`json`, (context) => JSON.stringify(context, null, 2));
+//  <pre>{{{json this.no}}}</pre>
 hbs.registerHelper(`not`, (value) => !value);
 hbs.registerHelper(
   `includes`,
@@ -51,11 +52,11 @@ hbs.registerHelper(`isEmpty`, (val) => {
   if (val == null) return true;
   if (typeof val === `object`) return Object.keys(val).length === 0;
   return false;
-}); //  <pre>{{{json this.no}}}</pre>
+});
 
 // inisialisasi hbs
 app.set(`view engine`, `hbs`); // pakai Handlebars engine
-app.set(`views`, `./src/views`); // lokasi folder views
+app.set(`views`, path.join(__dirname, `src`, `views`)); // lokasi folder views
 app.use(`/assets`, express.static(path.join(__dirname, `src`, `assets`))); // path untuk file statis
 app.use(express.urlencoded({ extended: false })); // baca data dari form POST
 
@@ -63,7 +64,7 @@ app.use(express.urlencoded({ extended: false })); // baca data dari form POST
 app.get(`/`, home);
 app.get(`/edit/:id`, edit);
 app.get(`/detail/:id`, detail);
-app.get(`*catchall`, (req, res) => res.send(`Page not found`)); // path -> about, foo/bar
+app.get(`*catchall`, (req, res) => res.render(`none`)); // path -> about, foo/bar
 
 // route handle data
 app.post(`/`, upload.single(`img`), handleHome);
@@ -171,7 +172,7 @@ async function edit(req, res) {
 async function detail(req, res) {
   try {
     function formatDate(date) {
-      const [year, month, day] = date.toISOString().split("T")[0].split(`-`);
+      const [year, month, day] = date.toISOString().split(`T`)[0].split(`-`);
       const monthNames = [
         `Jan`,
         `Feb`,
@@ -240,7 +241,7 @@ async function detail(req, res) {
         .map((t) => techSpan[t.trim().toLowerCase()])
         // buang spasi, konversi huruf kecil -> lalu bandingkan dengana techSpan
         .filter(Boolean), // skip data null
-    }; // [{ name: "React JS", icon: "fa-react" }]
+    }; // [{ name: `React JS`, icon: `fa-react` }]
     res.render(`detail`, { row });
   } catch (err) {
     console.log(`ErrorGET_detail: ${err}`);
@@ -254,8 +255,7 @@ async function handleHome(req, res) {
     const { name, start, end, desc, tech } = req.body;
     const checkedTechs = Array.isArray(tech) ? tech.join() : tech || ``;
     await db.query(
-      `INSERT INTO public.project (name_project, date_start, date_end, description, technologies, image_filename) 
-        VALUES ($1, $2, $3, $4, $5, $6 );`,
+      `INSERT INTO public.project (name_project, date_start, date_end, description, technologies, image_filename) VALUES ($1, $2, $3, $4, $5, $6 );`,
       [name, start, end, desc, checkedTechs, filename]
     );
     await db.query(
@@ -283,14 +283,7 @@ async function handleEdit(req, res) {
     req.file ? (filename = req.file.filename) : (filename = image_filename);
 
     await db.query(
-      `UPDATE public.project SET
-            name_project = $1,
-            date_start = $2,
-            date_end = $3,
-            description = $4,
-            technologies = $5,
-            image_filename = $6
-          WHERE no = $7;`,
+      `UPDATE public.project SET name_project = $1, date_start = $2, date_end = $3, description = $4, technologies = $5, image_filename = $6 WHERE no = $7;`,
       [name, start, end, desc, checkedTechs, filename, id]
     );
   } catch (err) {

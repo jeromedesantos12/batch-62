@@ -33,6 +33,11 @@ img[alt="logo"]:hover {
   justify-content: center;
 }
 
+.pages .none {
+  max-width: 40em;
+  margin-top: -5em;
+}
+
 .page {
   display: flex;
   flex-direction: column;

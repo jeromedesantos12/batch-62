@@ -19,7 +19,6 @@ if (cards) {
 
 function detailProject(e) {
   const no = e.currentTarget.dataset.index;
-  console.log("no", no);
   window.location.href = `/detail/${no}`;
 }
 

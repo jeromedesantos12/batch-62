@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <script src="../assets/js/script.js" defer></script>
-    <title>{{row.name_project}}</title>
+    <title>404 Page</title>
   </head>
   <body>
     <!-- scroll atas -->
@@ -42,37 +42,8 @@
     </div>
 
     <div class="pages">
-      <div class="page">
-        <h1>{{row.name_project}}</h1>
-        <section>
-          <img
-            src="../assets/uploads/{{row.image_filename}}"
-            alt="{{row.name_project}}"
-            class="cover"
-          />
-          <div class="info">
-            <aside>
-              <h2>Duration</h2>
-              <span><i class="bi bi-calendar-week"></i>
-                <p>{{row.start}} - {{row.end}}</p>
-              </span>
-              <span><i class="bi bi-clock-history"></i>
-                <p>{{row.month}} bulan</p></span>
-            </aside>
-
-            <aside>
-              <h2>Technologies</h2>
-              {{#each row.tech}}
-                <span>
-                  <i class="fa-brands {{this.icon}}"></i>
-                  <p>{{this.name}}</p>
-                </span>
-              {{/each}}
-            </aside>
-          </div>
-        </section>
-        <p>{{row.description}}</p>
-      </div>
+      <img class="none" src="../assets/img/none.png" alt="notFound" />
+      {{! <h1>404 NOT FOUND</h1> }}
     </div>
   </body>
 </html>
