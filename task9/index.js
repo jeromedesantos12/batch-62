@@ -62,12 +62,16 @@ app.use(express.urlencoded({ extended: false })); // baca data dari form POST
 
 // route render
 app.get(`/`, home);
+app.get(`/login`, login);
+app.get(`/register`, register);
 app.get(`/edit/:id`, edit);
 app.get(`/detail/:id`, detail);
-app.get(`*catchall`, (req, res) => res.render(`none`)); // path -> about, foo/bar
+app.get(`*catchall`, none); // path -> about, foo/bar
 
 // route handle data
 app.post(`/`, upload.single(`img`), handleHome);
+app.post(`/login`, handleLogin);
+app.post(`/register`, upload.single(`img`), handleRegister);
 app.post(`/edit/:id`, upload.single(`img`), handleEdit);
 app.post(`/delete/:id`, handleDelete);
 
@@ -100,7 +104,7 @@ async function home(req, res) {
     const { rows } = await db.query(
       `SELECT no, name_project, date_start, date_end, description, technologies, image_filename FROM public.project ORDER BY no ASC`
     );
-    const sanitizeRows = rows.map((row) => {
+    const updRows = rows.map((row) => {
       const {
         no,
         name_project,
@@ -130,39 +134,39 @@ async function home(req, res) {
     });
     if (rows.length === 0)
       await db.query(`ALTER SEQUENCE project_no_seq RESTART WITH 1;`);
-    res.render(`index`, { sanitizeRows });
+    res.render(`index`, { updRows });
   } catch (err) {
     console.log(`ErrorGET_home: ${err}`);
   }
 }
 
+function login(req, res) {
+  res.render(`login`);
+}
+function register(req, res) {
+  res.render(`register`);
+}
+
 async function edit(req, res) {
   try {
     const { id } = req.params;
-    const [
-      {
-        name_project,
-        date_start,
-        date_end,
-        description,
-        technologies,
-        image_filename,
-      },
-    ] = (
-      await db.query(
-        `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
-        [id]
-      )
-    ).rows;
+    const { rows } = await db.query(
+      `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
+      [id]
+    );
+    ``;
+
+    if (!rows[0]) return res.render(`none`);
     const row = {
-      id,
-      name_project,
-      start: new Date(date_start).toISOString().split(`T`)[0],
-      end: new Date(date_end).toISOString().split(`T`)[0],
-      description,
-      tech: technologies.split(`,`).map((t) => t.trim()),
-      image_filename,
+      id: id,
+      name_project: rows[0].name_project,
+      start: new Date(rows[0].date_start).toISOString().split(`T`)[0],
+      end: new Date(rows[0].date_end).toISOString().split(`T`)[0],
+      description: rows[0].description,
+      tech: rows[0].technologies.split(`,`).map((t) => t.trim()),
+      image_filename: rows[0].image_filename,
     };
+
     res.render(`index`, { row });
   } catch (err) {
     console.log(`ErrorGET_edit: ${err}`);
@@ -210,42 +214,36 @@ async function detail(req, res) {
     };
 
     const { id } = req.params;
-    const [
-      {
-        name_project,
-        date_start,
-        date_end,
-        description,
-        technologies,
-        image_filename,
-      },
-    ] = (
-      await db.query(
-        `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
-        [id]
-      )
-    ).rows;
+    const { rows } = await db.query(
+      `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
+      [id]
+    );
 
+    if (!rows[0]) return res.render(`none`);
     const row = {
-      id,
-      name_project,
-      start: formatDate(date_start),
-      end: formatDate(date_end),
+      id: rows[0].id,
+      name_project: rows[0].name_project,
+      start: formatDate(rows[0].date_start),
+      end: formatDate(rows[0].date_end),
       month:
-        (date_end.getFullYear() - date_start.getFullYear()) * 12 +
-        (date_end.getMonth() - date_start.getMonth()),
-      description,
-      image_filename,
-      tech: technologies
-        .split(`,`) // pisahkan dengan koma [ js, react, php, laravel ]
+        (rows[0].date_end.getFullYear() - rows[0].date_start.getFullYear()) *
+          12 +
+        (rows[0].date_end.getMonth() - rows[0].date_start.getMonth()),
+      description: rows[0].description,
+      image_filename: rows[0].image_filename,
+      tech: rows[0].technologies
+        .split(`,`)
         .map((t) => techSpan[t.trim().toLowerCase()])
-        // buang spasi, konversi huruf kecil -> lalu bandingkan dengana techSpan
-        .filter(Boolean), // skip data null
-    }; // [{ name: `React JS`, icon: `fa-react` }]
+        .filter(Boolean),
+    };
     res.render(`detail`, { row });
   } catch (err) {
     console.log(`ErrorGET_detail: ${err}`);
   }
+}
+
+function none(req, res) {
+  res.render(`none`);
 }
 
 // post (async)
@@ -270,17 +268,15 @@ async function handleHome(req, res) {
 // post (async)
 async function handleEdit(req, res) {
   try {
-    let filename;
     const { id } = req.params;
     const { name, start, end, desc, tech } = req.body;
     const checkedTechs = Array.isArray(tech) ? tech.join() : tech || ``;
-    const [{ image_filename }] = (
-      await db.query(
-        `SELECT no, image_filename FROM public.project WHERE no = $1`,
-        [id]
-      )
-    ).rows;
-    req.file ? (filename = req.file.filename) : (filename = image_filename);
+    const { rows } = await db.query(
+      `SELECT no, name_project, image_filename FROM public.project WHERE no = $1`,
+      [id]
+    );
+    const filename =
+      req.file?.filename ?? rows[0]?.image_filename ?? "default.jpg";
 
     await db.query(
       `UPDATE public.project SET name_project = $1, date_start = $2, date_end = $3, description = $4, technologies = $5, image_filename = $6 WHERE no = $7;`,
@@ -309,4 +305,37 @@ async function handleDelete(req, res) {
     console.log(`ErrorPOST_delete: ${err}`);
   }
   res.redirect(`/`);
+}
+
+async function handleLogin(req, res) {
+  try {
+    const { email, password } = req.body;
+    const { row } = await db.query(
+      `SELECT email_account, password_account FROM public.account WHERE email_account = $1`,
+      [email]
+    );
+    if (!row) return res.render(`/login`);
+    res.render(`/`);
+  } catch (err) {
+    console.log(`ErrorPOST_login: ${err}`);
+  }
+}
+async function handleRegister(req, res) {
+  try {
+    const { name, email, password } = req.body;
+    const { row } = await db.query(
+      `SELECT email_account FROM public.account WHERE email_account = $1`,
+      [email]
+    );
+    if (!row) {
+      await db.query(
+        `INSERT INTO public.account (name_account, email_account, password_account) VALUES ($1, $2, $3);`,
+        [name, email, password]
+      );
+      return res.render(`/login`);
+    }
+    res.render(`/register`);
+  } catch (err) {
+    console.log(`ErrorPOST_register: ${err}`);
+  }
 }

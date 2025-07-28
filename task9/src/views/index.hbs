@@ -25,20 +25,16 @@
     <div class="menubar">
       <nav>
         <img src="../assets/img/logo.png" alt="logo" />
-        <a href="#">Home</a>
-        <a href="#">My Project</a>
       </nav>
       <div class="menu-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <button class="tombol-contactMe">Contact Me</button>
+      <button class="tombol-contactMe">Logout</button>
     </div>
     <div class="menu-mini">
-      <a href="#">Home</a>
-      <a href="#">My Project</a>
-      <a href="#">Contact</a>
+      <a href="#">Logout</a>
     </div>
 
     <!-- isi konten -->
@@ -156,10 +152,10 @@
     <div id="dropDown" style="{{#if (not row)}}display:block;{{else}}display:none;{{/if}}">
       <h1>MY PROJECT</h1>
       <div class="wrapper">
-        {{#if (isEmpty sanitizeRows)}}
+        {{#if (isEmpty updRows)}}
             <p class="none">Tidak ada project.</p>
         {{else}}
-          {{#each sanitizeRows}}
+          {{#each updRows}}
             <div
               class="cards"
               data-index="{{this.no}}"

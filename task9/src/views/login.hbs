@@ -15,34 +15,30 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <script src="../assets/js/script.js" defer></script>
-    <title>404 Page</title>
+    <title>Login</title>
   </head>
   <body>
-    <!-- scroll atas -->
-    <div id="header"></div>
-    <div class="add bi bi-plus"></div>
-    <!-- bagian menu -->
-    <div class="menubar">
-      <nav>
-        <img src="../assets/img/logo.png" alt="logo" />
-        <a href="#">Home</a>
-        <a href="#">My Project</a>
-      </nav>
-      <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <button class="tombol-contactMe">Contact Me</button>
-    </div>
-    <div class="menu-mini">
-      <a href="#">Home</a>
-      <a href="#">My Project</a>
-      <a href="#">Contact</a>
-    </div>
+    <div class="container">
+      <form
+        action="/login"
+        method="POST"
+        enctype="application/x-www-form-urlencoded"
+      >
+        <h1>LOGIN untuk melanjutkan</h1>
+        <div class="email">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" />
+          <span></span>
+        </div>
+        <div class="password">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+          <span></span>
+        </div>
+        <h2>Belum punya akun? <a href="/register">Register</a></h2>
 
-    <div class="pages">
-      <img class="none" src="../assets/img/none.png" alt="notFound" />
+        <button class="submit" type="submit">login</button>
+      </form>
     </div>
   </body>
 </html>

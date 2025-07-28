@@ -34,8 +34,8 @@ img[alt="logo"]:hover {
 }
 
 .pages .none {
-  max-width: 40em;
-  margin-top: -5em;
+  max-width: 30em;
+  margin-top: -3em;
 }
 
 .page {
@@ -301,6 +301,9 @@ form {
 }
 
 .name,
+.email,
+.password,
+.confirm_password,
 .date,
 .desc,
 .tech,
