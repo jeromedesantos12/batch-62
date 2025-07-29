@@ -4,18 +4,22 @@ const miniMenu = document.querySelector(`.menu-mini`);
 const upElement = document.querySelector(`.add`);
 const header = document.querySelector(`#header`);
 const dropDown = document.querySelector(`#dropDown`);
+const miniLog = document.querySelector(`#miniLog`);
+const dumb = document.querySelector(`nav img`);
+const logout = document.querySelector(`form[action="/logout"]`);
 const cards = document.querySelectorAll(`.cards`);
 const editButton = document.querySelectorAll(`.edit`);
 const deleteButton = document.querySelectorAll(`.delete`);
 
 // event
-toggleMenu.addEventListener(`click`, toggle);
-upElement.addEventListener(`click`, up);
-if (cards) {
-  cards.forEach((btn) => btn.addEventListener(`click`, detailProject));
-  editButton.forEach((btn) => btn.addEventListener(`click`, editProject));
-  deleteButton.forEach((btn) => btn.addEventListener(`click`, deleteProject));
-}
+dumb.addEventListener("click", handleDumb);
+miniLog.addEventListener("click", handleLog);
+toggleMenu.addEventListener(`click`, handleToggle);
+upElement.addEventListener(`click`, handleUp);
+
+cards?.forEach((btn) => btn.addEventListener(`click`, detailProject));
+editButton?.forEach((btn) => btn.addEventListener(`click`, editProject));
+deleteButton?.forEach((btn) => btn.addEventListener(`click`, deleteProject));
 
 function detailProject(e) {
   const no = e.currentTarget.dataset.index;
@@ -34,12 +38,20 @@ function deleteProject(e) {
   if (!confirmDelete) e.preventDefault();
 }
 
-function toggle() {
+function handleDumb() {
+  window.location.href = `/`;
+}
+
+function handleLog() {
+  logout.submit();
+}
+
+function handleToggle() {
   miniMenu.classList.toggle(`active`);
   toggleAnimate.forEach((toggle) => toggle.classList.toggle(`active`));
 }
 
-function up() {
+function handleUp() {
   header.scrollIntoView({ behavior: "smooth" });
   history.pushState(
     "",

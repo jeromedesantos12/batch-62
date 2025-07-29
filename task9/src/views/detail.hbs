@@ -31,11 +31,20 @@
         <span></span>
         <span></span>
       </div>
-      <button class="tombol-contactMe">Logout</button>
+      <form action="/logout" method="POST">
+        <button type="submit" class="log">{{#if
+            userData
+          }}Logout{{else}}Login{{/if}}</button>
+      </form>
     </div>
     <div class="menu-mini">
-      <a href="#">Logout</a>
+      <form action="/logout" method="POST">
+        <p id="miniLog" role="button" tabindex="0">{{#if
+            userData
+          }}Logout{{else}}Login{{/if}}</p>
+      </form>
     </div>
+
     <div class="pages">
       <div class="page">
         <h1>{{row.name_project}}</h1>

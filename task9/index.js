@@ -1,6 +1,9 @@
 // import package
 import express from "express";
+import session from "express-session";
+import flash from "express-flash";
 import multer from "multer";
+import bcrypt from "bcrypt";
 import hbs from "hbs";
 import fs from "fs/promises";
 import path from "path";
@@ -59,30 +62,62 @@ app.set(`view engine`, `hbs`); // pakai Handlebars engine
 app.set(`views`, path.join(__dirname, `src`, `views`)); // lokasi folder views
 app.use(`/assets`, express.static(path.join(__dirname, `src`, `assets`))); // path untuk file statis
 app.use(express.urlencoded({ extended: false })); // baca data dari form POST
+app.use(flash()); // alert dari backend
+app.use(
+  session({
+    secret: `secretKey`,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // route render
 app.get(`/`, home);
-app.get(`/login`, login);
-app.get(`/register`, register);
-app.get(`/edit/:id`, edit);
+app.get(`/login`, authLog, login);
+app.get(`/register`, authLog, register);
+app.get(`/edit/:id`, auth, edit);
 app.get(`/detail/:id`, detail);
 app.get(`*catchall`, none); // path -> about, foo/bar
 
 // route handle data
-app.post(`/`, upload.single(`img`), handleHome);
-app.post(`/login`, handleLogin);
-app.post(`/register`, upload.single(`img`), handleRegister);
-app.post(`/edit/:id`, upload.single(`img`), handleEdit);
-app.post(`/delete/:id`, handleDelete);
+app.post(`/`, auth, upload.single(`img`), handleHome);
+app.post(`/login`, authLog, handleLogin);
+app.post(`/logout`, handleLogout);
+app.post(`/register`, authLog, handleRegister);
+app.post(`/edit/:id`, auth, upload.single(`img`), handleEdit);
+app.post(`/delete/:id`, auth, handleDelete);
 
 // jalanin server
 app.listen(port, () =>
   console.log(`Server is running on http://localhost:${port}`)
 );
 
-// get (async)
+function auth(req, res, next) {
+  if (!req.session.user) return res.redirect(`/login`);
+  next();
+}
+
+function authLog(req, res, next) {
+  if (req.session.user) return res.redirect(`/`);
+  next();
+}
+
+function none(req, res) {
+  const userData = req.session?.user?.name;
+  res.render(`none`, { userData });
+}
+
+function login(req, res) {
+  res.render(`login`, { message: req.flash(`error`) });
+}
+
+function register(req, res) {
+  res.render(`register`, { message: req.flash(`error`) });
+}
+
 async function home(req, res) {
   try {
+    const userData = req.session?.user?.name;
     const techSpan = {
       js: {
         name: `JavaScript`,
@@ -134,21 +169,16 @@ async function home(req, res) {
     });
     if (rows.length === 0)
       await db.query(`ALTER SEQUENCE project_no_seq RESTART WITH 1;`);
-    res.render(`index`, { updRows });
+
+    res.render(`index`, { updRows, userData });
   } catch (err) {
     console.log(`ErrorGET_home: ${err}`);
   }
 }
 
-function login(req, res) {
-  res.render(`login`);
-}
-function register(req, res) {
-  res.render(`register`);
-}
-
 async function edit(req, res) {
   try {
+    const userData = req.session?.user?.name;
     const { id } = req.params;
     const { rows } = await db.query(
       `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
@@ -166,8 +196,7 @@ async function edit(req, res) {
       tech: rows[0].technologies.split(`,`).map((t) => t.trim()),
       image_filename: rows[0].image_filename,
     };
-
-    res.render(`index`, { row });
+    res.render(`index`, { row, userData });
   } catch (err) {
     console.log(`ErrorGET_edit: ${err}`);
   }
@@ -175,6 +204,7 @@ async function edit(req, res) {
 
 async function detail(req, res) {
   try {
+    const userData = req.session?.user?.name;
     function formatDate(date) {
       const [year, month, day] = date.toISOString().split(`T`)[0].split(`-`);
       const monthNames = [
@@ -193,7 +223,6 @@ async function detail(req, res) {
       ];
       return `${day} ${monthNames[parseInt(month) - 1]} ${year}`;
     }
-
     const techSpan = {
       js: {
         name: `JavaScript`,
@@ -212,7 +241,6 @@ async function detail(req, res) {
         icon: `fa-laravel`,
       },
     };
-
     const { id } = req.params;
     const { rows } = await db.query(
       `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
@@ -236,25 +264,21 @@ async function detail(req, res) {
         .map((t) => techSpan[t.trim().toLowerCase()])
         .filter(Boolean),
     };
-    res.render(`detail`, { row });
+    res.render(`detail`, { row, userData });
   } catch (err) {
     console.log(`ErrorGET_detail: ${err}`);
   }
 }
 
-function none(req, res) {
-  res.render(`none`);
-}
-
-// post (async)
 async function handleHome(req, res) {
   try {
     const { filename } = req.file;
     const { name, start, end, desc, tech } = req.body;
     const checkedTechs = Array.isArray(tech) ? tech.join() : tech || ``;
+
     await db.query(
       `INSERT INTO public.project (name_project, date_start, date_end, description, technologies, image_filename) VALUES ($1, $2, $3, $4, $5, $6 );`,
-      [name, start, end, desc, checkedTechs, filename]
+      [name.trim(), start, end, desc.trim(), checkedTechs, filename]
     );
     await db.query(
       `SELECT setval('project_no_seq', (SELECT MAX(no) FROM project));`
@@ -265,22 +289,21 @@ async function handleHome(req, res) {
   res.redirect(`/`);
 }
 
-// post (async)
 async function handleEdit(req, res) {
   try {
     const { id } = req.params;
     const { name, start, end, desc, tech } = req.body;
     const checkedTechs = Array.isArray(tech) ? tech.join() : tech || ``;
     const { rows } = await db.query(
-      `SELECT no, name_project, image_filename FROM public.project WHERE no = $1`,
+      `SELECT image_filename FROM public.project WHERE no = $1`,
       [id]
     );
     const filename =
-      req.file?.filename ?? rows[0]?.image_filename ?? "default.jpg";
+      req.file?.filename ?? rows[0]?.image_filename ?? `default.jpg`;
 
     await db.query(
       `UPDATE public.project SET name_project = $1, date_start = $2, date_end = $3, description = $4, technologies = $5, image_filename = $6 WHERE no = $7;`,
-      [name, start, end, desc, checkedTechs, filename, id]
+      [name.trim(), start, end, desc.trim(), checkedTechs, filename, id]
     );
   } catch (err) {
     console.log(`ErrorPOST_edit: ${err}`);
@@ -291,15 +314,14 @@ async function handleEdit(req, res) {
 async function handleDelete(req, res) {
   try {
     const { id } = req.params;
-    const [{ image_filename }] = (
-      await db.query(
-        `SELECT image_filename FROM public.project WHERE no = $1`,
-        [id]
-      )
-    ).rows;
+    const { rows } = await db.query(
+      `SELECT image_filename FROM public.project WHERE no = $1`,
+      [id]
+    );
+
     await db.query(`DELETE FROM public.project WHERE no = $1;`, [id]);
     await fs.unlink(
-      path.join(__dirname, `src`, `assets`, `uploads`, image_filename)
+      path.join(__dirname, `src`, `assets`, `uploads`, rows[0].image_filename)
     );
   } catch (err) {
     console.log(`ErrorPOST_delete: ${err}`);
@@ -309,32 +331,56 @@ async function handleDelete(req, res) {
 
 async function handleLogin(req, res) {
   try {
-    const { email, password } = req.body;
-    const { row } = await db.query(
-      `SELECT email_account, password_account FROM public.account WHERE email_account = $1`,
-      [email]
+    const { mail, pass } = req.body;
+    const { rows } = await db.query(
+      `SELECT name, email, password FROM public.account WHERE email = $1`,
+      [mail.trim()]
     );
-    if (!row) return res.render(`/login`);
-    res.render(`/`);
+    ``;
+
+    if (!rows[0] || !(await bcrypt.compare(pass, rows[0].password))) {
+      req.flash(`error`, `Email/password salah`);
+      return res.redirect(`/login`);
+    }
+
+    req.session.user = { name: rows[0].name.split(` `)[0] };
+    res.redirect(`/`);
   } catch (err) {
     console.log(`ErrorPOST_login: ${err}`);
   }
 }
+
+async function handleLogout(req, res) {
+  try {
+    await req.session.destroy();
+    res.redirect(`/login`);
+  } catch (err) {
+    console.log(`ErrorPOST_logout: ${err}`);
+  }
+}
+
 async function handleRegister(req, res) {
   try {
-    const { name, email, password } = req.body;
-    const { row } = await db.query(
-      `SELECT email_account FROM public.account WHERE email_account = $1`,
-      [email]
+    const { firstName, lastName, mail, pass } = req.body;
+    const name = `${firstName.trim()} ${lastName.trim()}`;
+    const hashedPass = await bcrypt.hash(pass, 10);
+    const { rows } = await db.query(
+      `SELECT email FROM public.account WHERE email = $1`,
+      [mail]
     );
-    if (!row) {
-      await db.query(
-        `INSERT INTO public.account (name_account, email_account, password_account) VALUES ($1, $2, $3);`,
-        [name, email, password]
-      );
-      return res.render(`/login`);
+
+    if (rows[0]) {
+      req.flash(`error`, `Email sudah terdaftar`);
+      return res.redirect(`/register`);
     }
-    res.render(`/register`);
+    await db.query(
+      `INSERT INTO public.account (name, email, password) VALUES ($1, $2, $3);`,
+      [name, mail.trim(), hashedPass]
+    );
+    await db.query(
+      `SELECT setval('project_no_seq', (SELECT MAX(no) FROM project));`
+    );
+    res.redirect(`/login`);
   } catch (err) {
     console.log(`ErrorPOST_register: ${err}`);
   }

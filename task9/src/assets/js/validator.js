@@ -168,12 +168,10 @@ function handleSubmit(e) {
   const isImageValid = imgValid(file);
 
   // ambil data
-  if (
-    !isNameValid ||
+  (!isNameValid ||
     !isDateValid ||
     !isDescValid ||
     !isTechValid ||
-    !isImageValid
-  )
+    !isImageValid) &&
     e.preventDefault();
 }
