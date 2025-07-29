@@ -179,7 +179,9 @@ async function home(req, res) {
 async function edit(req, res) {
   try {
     const userData = req.session?.user?.name;
-    const { id } = req.params;
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.render(`none`);
+
     const { rows } = await db.query(
       `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
       [id]
@@ -205,6 +207,9 @@ async function edit(req, res) {
 async function detail(req, res) {
   try {
     const userData = req.session?.user?.name;
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.render(`none`);
+
     function formatDate(date) {
       const [year, month, day] = date.toISOString().split(`T`)[0].split(`-`);
       const monthNames = [
@@ -241,7 +246,6 @@ async function detail(req, res) {
         icon: `fa-laravel`,
       },
     };
-    const { id } = req.params;
     const { rows } = await db.query(
       `SELECT name_project, date_start, date_end, description, technologies, image_filename FROM project WHERE no = $1;`,
       [id]
@@ -291,7 +295,9 @@ async function handleHome(req, res) {
 
 async function handleEdit(req, res) {
   try {
-    const { id } = req.params;
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.render(`none`);
+
     const { name, start, end, desc, tech } = req.body;
     const checkedTechs = Array.isArray(tech) ? tech.join() : tech || ``;
     const { rows } = await db.query(
@@ -313,7 +319,9 @@ async function handleEdit(req, res) {
 
 async function handleDelete(req, res) {
   try {
-    const { id } = req.params;
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.render(`none`);
+
     const { rows } = await db.query(
       `SELECT image_filename FROM public.project WHERE no = $1`,
       [id]
