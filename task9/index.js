@@ -82,7 +82,7 @@ app.get(`*catchall`, none); // path -> about, foo/bar
 // route handle data
 app.post(`/`, auth, upload.single(`img`), handleHome);
 app.post(`/login`, authLog, handleLogin);
-app.post(`/logout`, handleLogout);
+app.post(`/logout`, auth, handleLogout);
 app.post(`/register`, authLog, handleRegister);
 app.post(`/edit/:id`, auth, upload.single(`img`), handleEdit);
 app.post(`/delete/:id`, auth, handleDelete);
@@ -344,7 +344,6 @@ async function handleLogin(req, res) {
       `SELECT name, email, password FROM public.account WHERE email = $1`,
       [mail.trim()]
     );
-    ``;
 
     if (!rows[0] || !(await bcrypt.compare(pass, rows[0].password))) {
       req.flash(`error`, `Email/password salah`);
