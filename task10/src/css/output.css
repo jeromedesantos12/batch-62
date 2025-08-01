@@ -1,4 +1,5 @@
 /*! tailwindcss v4.1.11 | MIT License | https://tailwindcss.com */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap");
 @layer properties;
@@ -10,6 +11,7 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-slate-100: oklch(96.8% 0.007 247.896);
+    --color-slate-800: oklch(27.9% 0.041 260.031);
     --color-white: #fff;
     --spacing: 0.25rem;
     --container-md: 28rem;
@@ -284,6 +286,16 @@
   .hidden {
     display: none;
   }
+  .size-14 {
+    width: calc(var(--spacing) * 14);
+    height: calc(var(--spacing) * 14);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
   .h-9 {
     height: calc(var(--spacing) * 9);
   }
@@ -292,6 +304,9 @@
   }
   .h-14 {
     height: calc(var(--spacing) * 14);
+  }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
   }
   .w-9 {
     width: calc(var(--spacing) * 9);
@@ -399,17 +414,23 @@
   .bg-primary {
     background-color: var(--color-primary);
   }
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
   .bg-slate-100 {
     background-color: var(--color-slate-100);
   }
   .bg-white {
     background-color: var(--color-white);
   }
-  .bg-white\/70 {
-    background-color: color-mix(in srgb, #fff 70%, transparent);
+  .bg-white\/50 {
+    background-color: color-mix(in srgb, #fff 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-white) 70%, transparent);
+      background-color: color-mix(in oklab, var(--color-white) 50%, transparent);
     }
+  }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -438,6 +459,9 @@
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
   .pt-10 {
     padding-top: calc(var(--spacing) * 10);
   }
@@ -446,6 +470,9 @@
   }
   .pt-36 {
     padding-top: calc(var(--spacing) * 36);
+  }
+  .pb-1 {
+    padding-bottom: calc(var(--spacing) * 1);
   }
   .pb-10 {
     padding-bottom: calc(var(--spacing) * 10);
@@ -703,6 +730,11 @@
       background-color: transparent;
     }
   }
+  .lg\:py-0 {
+    @media (width >= 64rem) {
+      padding-block: calc(var(--spacing) * 0);
+    }
+  }
   .lg\:shadow-none {
     @media (width >= 64rem) {
       --tw-shadow: 0 0 #0000;
@@ -713,6 +745,63 @@
     @media (width >= 80rem) {
       padding-inline: calc(var(--spacing) * 20);
     }
+  }
+  .dark\:bg-dark {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-dark);
+    }
+  }
+  .dark\:bg-dark\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, #0f172a 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-dark) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-800);
+    }
+  }
+  .dark\:text-secondary {
+    &:where(.dark, .dark *) {
+      color: var(--color-secondary);
+    }
+  }
+  .dark\:text-secondary-light {
+    &:where(.dark, .dark *) {
+      color: var(--color-secondary-light);
+    }
+  }
+  .dark\:text-white {
+    &:where(.dark, .dark *) {
+      color: var(--color-white);
+    }
+  }
+  .dark\:shadow-md {
+    &:where(.dark, .dark *) {
+      --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .lg\:dark\:bg-transparent {
+    @media (width >= 64rem) {
+      &:where(.dark, .dark *) {
+        background-color: transparent;
+      }
+    }
+  }
+}
+@layer base {
+  * {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+    --tw-ease: var(--ease-in-out);
+    transition-timing-function: var(--ease-in-out);
   }
 }
 @layer components {
@@ -726,6 +815,9 @@
     width: 30px;
     border-radius: calc(infinity * 1px);
     background-color: var(--color-dark);
+    &:where(.dark, .dark *) {
+      background-color: var(--color-white);
+    }
   }
   .hamburger-active > span:nth-child(1) {
     margin-bottom: calc(var(--spacing) * -0.5);
@@ -741,6 +833,10 @@
   .hamburger-active > span:nth-child(3) {
     margin-top: calc(var(--spacing) * -0.5);
     rotate: calc(45deg * -1);
+  }
+  #dark-toggle:checked ~ label div.toggle-circle {
+    --tw-translate-x: calc(var(--spacing) * 3);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 }
 @property --tw-border-style {
@@ -880,6 +976,21 @@
   inherits: false;
   initial-value: 1;
 }
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @keyframes pulse {
   50% {
     opacity: 0.5;
@@ -919,6 +1030,9 @@
       --tw-scale-x: 1;
       --tw-scale-y: 1;
       --tw-scale-z: 1;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
     }
   }
 }
