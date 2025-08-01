@@ -10,12 +10,7 @@
   --color-secondary: #64748b;
   --color-secondary-light: #94a3b8;
   --color-dark: #0f172a;
-  
-/* @layer base {
-  * {
-    border: red 1px solid;
-  }
-} */
+}
 
 @layer components {
   .animate-loop-scroll {
