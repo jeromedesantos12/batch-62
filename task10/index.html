@@ -18,15 +18,15 @@
   <body class="font-inter">
     <!-- Header Start -->
     <header
-      class="shadow-md backdrop-blur-sm bg-white/70 sticky top-0 left-0 flex items-center z-10"
+      class="backdrop-blur-sm bg-white/70 sticky top-0 left-0 z-10 flex items-center shadow-md"
     >
       <div
-        class="w-full px-5 flex items-center justify-between lg:gap-100 lg:justify-around relative"
+        class="lg:gap-100 lg:justify-around relative flex items-center justify-between w-full px-5"
       >
         <div class="px-4">
           <a
             href="#"
-            class="font-play font-bold text-lg text-primary block py-6 whitespace-nowrap transition duration-300 ease-in-out hover:text-primary-light"
+            class="font-play text-primary whitespace-nowrap hover:text-primary-light block py-6 text-lg font-bold transition duration-300 ease-in-out"
             >jeromedesantos ☕︎</a
           >
         </div>
@@ -35,7 +35,7 @@
             id="hamburger"
             name="hamburger"
             type="button"
-            class="block absolute right-10 group lg:hidden"
+            class="right-10 group lg:hidden absolute block"
           >
             <span
               class="hamburger-line group-transition duration-300 origin-top-left"
@@ -50,25 +50,25 @@
             id="nav-menu"
             class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none transition duration-300 ease-in-out"
           >
-            <ul class="block lg:flex">
+            <ul class="lg:flex block">
               <li class="group">
                 <a
                   href="#"
-                  class="flex text-base text-dark py-2 mx-6 group-hover:text-primary transition duration-300 ease-in-out"
+                  class="text-dark group-hover:text-primary flex py-2 mx-6 text-base transition duration-300 ease-in-out"
                   >Home</a
                 >
               </li>
               <li class="group">
                 <a
                   href="#about"
-                  class="flex text-base text-dark py-2 mx-6 group-hover:text-primary transition duration-300 ease-in-out"
+                  class="text-dark group-hover:text-primary flex py-2 mx-6 text-base transition duration-300 ease-in-out"
                   >About</a
                 >
               </li>
               <li class="group">
                 <a
                   href="#portfolio"
-                  class="flex text-base text-dark py-2 mx-6 group-hover:text-primary transition duration-300 ease-in-out"
+                  class="text-dark group-hover:text-primary flex py-2 mx-6 text-base transition duration-300 ease-in-out"
                   >Portfolio</a
                 >
               </li>
@@ -81,41 +81,41 @@
 
     <!-- Hero Section Start -->
     <section id="home" class="pt-30 mb-20">
-      <div class="max-w-7xl mx-auto flex flex-col gap-10 lg:flex-row">
-        <div class="flex-1 self-center px-10">
-          <h1 class="text-base font-semibold text-primary">
+      <div class="max-w-7xl lg:flex-row flex flex-col gap-10 mx-auto">
+        <div class="self-center flex-1 px-10">
+          <h1 class="text-primary text-base font-semibold">
             Hallo Welt 👋, Ich bin
-            <span class="block font-bold text-dark text-4xl mt-1"
+            <span class="text-dark block mt-1 text-4xl font-bold"
               >Jeremy Santoso</span
             >
           </h1>
-          <h2 class="font-medium text-secondary text-lg mb-5">
+          <h2 class="text-secondary mb-5 text-lg font-medium">
             Web Programming & <span class="text-dark">Content Creator</span>
           </h2>
-          <p class="font-medium text-secondary-light mb-10 leading-relaxed">
+          <p class="text-secondary-light mb-10 font-medium leading-relaxed">
             A passionate Web Programmer who enjoys building applications using
             the <span class="text-dark">MERN stack</span> (MongoDB, Express.js,
             React, Node.js).
           </p>
-          <div class="flex flex-col gap-5 sm:gap-2 sm:flex-row">
+          <div class="sm:gap-2 sm:flex-row flex flex-col gap-5">
             <a
               href="https://wa.me/0895704298578"
               target="_blank"
-              class="w-fit text-base font-semibold text-white bg-primary py-2 px-8 rounded-full hover:shadow-lg hover:bg-primary-light transition duration-300 ease-in-out"
+              class="w-fit bg-primary hover:shadow-lg hover:bg-primary-light px-8 py-2 text-base font-semibold text-white transition duration-300 ease-in-out rounded-full"
             >
               WhatsApp</a
             >
             <a
               href="https://drive.google.com/file/d/1ZrViLFr-ZXWlmbWhn36GbG2HYbORRe1f/view?usp=sharing"
               target="_blank"
-              class="w-fit flex gap-2 items-center justify-center text-base font-semibold px-4 hover:text-secondary transition duration-300 ease-in-out"
+              class="w-fit hover:text-secondary flex items-center justify-center gap-2 px-4 text-base font-semibold transition duration-300 ease-in-out"
             >
               <span>download CV</span>
               <i class="fa-solid fa-download"></i
             ></a>
           </div>
         </div>
-        <div class="px-10 flex-1">
+        <div class="flex-1 px-10">
           <img
             src="src/img/profile/jeremy.png"
             alt="Jeremy Santoso"
@@ -128,16 +128,16 @@
 
     <!-- About Section Start -->
     <section id="about" class="pt-30 pb-32">
-      <div class="mx-auto max-w-7xl flex flex-col gap-10 lg:flex-row">
-        <div class="px-10 flex-2">
-          <h4 class="font-bold uppercase text-primary text-lg mb-3">
+      <div class="max-w-7xl lg:flex-row flex flex-col gap-10 mx-auto">
+        <div class="flex-2 px-10">
+          <h4 class="text-primary mb-3 text-lg font-bold uppercase">
             About Me
           </h4>
-          <h2 class="font-bold text-dark text-3xl mb-5 max-w-md">
+          <h2 class="text-dark max-w-md mb-5 text-3xl font-bold">
             I’m a web enthusiast who’s in a committed relationship with the MERN
             stack
           </h2>
-          <p class="font-medium text-base text-secondary-light">
+          <p class="text-secondary-light text-base font-medium">
             MongoDB, Express.js, React, and Node.js. I love turning ideas into
             web applications that are fast, fun, and functional. When I’m not
             wrangling APIs or battling bugs, you’ll find me geeking out over UI
@@ -148,17 +148,17 @@
             tech —I'm your person. Let's create something cool!
           </p>
         </div>
-        <div class="px-10 flex-1">
-          <h3 class="font-semibold text-dark text-2xl">Follow for more!</h3>
-          <p class="font-medium text-base text-secondary mb-6">
+        <div class="flex-1 px-10">
+          <h3 class="text-dark text-2xl font-semibold">Follow for more!</h3>
+          <p class="text-secondary mb-6 text-base font-medium">
             To see more interesting content..
           </p>
-          <div class="flex flex-wrap gap-2 justify-start">
+          <div class="flex flex-wrap justify-start gap-2">
             <!-- YouTube -->
             <a
               href="https://youtube.com/@kursusTUTOR"
               target="_blank"
-              class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+              class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
             >
               <i class="fa-brands fa-youtube"></i>
             </a>
@@ -166,7 +166,7 @@
             <a
               href="https://facebook.com/jeromedesantos12"
               target="_blank"
-              class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+              class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
             >
               <i class="fa-brands fa-facebook-f"></i>
             </a>
@@ -174,7 +174,7 @@
             <a
               href="https://instagram.com/jeremy001_"
               target="_blank"
-              class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+              class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
             >
               <i class="fa-brands fa-instagram"></i>
             </a>
@@ -182,7 +182,7 @@
             <a
               href="https://x.com/jeremy001_"
               target="_blank"
-              class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+              class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
             >
               <i class="fa-brands fa-x-twitter"></i>
             </a>
@@ -190,7 +190,7 @@
             <a
               href="https://linkedin.com/in/jeromedesantos12"
               target="_blank"
-              class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+              class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
             >
               <i class="fa-brands fa-linkedin-in"></i>
             </a>
@@ -198,7 +198,7 @@
             <a
               href="https://github.com/jeromedesantos12"
               target="_blank"
-              class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white"
+              class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center border rounded-full"
             >
               <i class="fa-brands fa-github"></i>
             </a>
@@ -209,30 +209,30 @@
     <!-- About Section End -->
 
     <!-- Portfolio Section Start -->
-    <section id="portfolio" class="pt-36 pb-16 bg-slate-100">
-      <div class="mx-auto px-4">
-        <div class="max-w-xl mx-auto text-center mb-16">
-          <h4 class="font-bold text-lg text-primary mb-2 uppercase">
+    <section id="portfolio" class="pt-36 bg-slate-100 pb-16">
+      <div class="px-4 mx-auto">
+        <div class="max-w-xl mx-auto mb-16 text-center">
+          <h4 class="text-primary mb-2 text-lg font-bold uppercase">
             Portfolio
           </h4>
-          <h2 class="font-bold text-dark text-3xl mb-4">Newest Project</h2>
-          <p class="font-medium text-md text-secondary">
+          <h2 class="text-dark mb-4 text-3xl font-bold">Newest Project</h2>
+          <p class="text-md text-secondary font-medium">
             Fresh out of the code oven! This project blends speed, security, and
             a dash of creativity. Built with Express and Tailwind, it's where
             form meets function in the slickest way possible.
           </p>
         </div>
       </div>
-      <div class="flex flex-wrap gap-10 justify-center xl:px-20">
+      <div class="xl:px-20 flex flex-wrap justify-center gap-10">
         <a
           href="https://github.com/jeromedesantos12/responsive-design/tree/main/latihan-css3"
           target="_blank"
-          class="max-w-md rounded-md pb-10 shadow-md overflow-hidden bg-white cursor-pointer block transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+          class="hover:shadow-lg hover:scale-105 block max-w-md pb-10 overflow-hidden transition duration-300 ease-in-out bg-white rounded-md shadow-md cursor-pointer"
         >
           <img src="src/img/project/project1.gif" alt="Gallery Img" />
-          <h3 class="font-semibold text-xl text-dark mt-5 mb-3 px-5">CSS3</h3>
+          <h3 class="text-dark px-5 mt-5 mb-3 text-xl font-semibold">CSS3</h3>
           <p
-            class="font-medium text-base text-secondary-light px-5 text-justify"
+            class="text-secondary-light px-5 text-base font-medium text-justify"
           >
             Cascading Style Sheets (CSS) is a style sheet language used for
             specifying the presentation and styling of a document written in a
@@ -243,14 +243,14 @@
         <a
           href="https://github.com/jeromedesantos12/responsive-design/tree/main/latihan-css-grid"
           target="_blank"
-          class="max-w-md rounded-md pb-10 shadow-md overflow-hidden bg-white cursor-pointer block transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+          class="hover:shadow-lg hover:scale-105 block max-w-md pb-10 overflow-hidden transition duration-300 ease-in-out bg-white rounded-md shadow-md cursor-pointer"
         >
           <img src="src/img/project/project2.gif" alt="Gallery Img" />
-          <h3 class="font-semibold text-xl text-dark mt-5 mb-3 px-5">
+          <h3 class="text-dark px-5 mt-5 mb-3 text-xl font-semibold">
             CSS GRID
           </h3>
           <p
-            class="font-medium text-base text-secondary-light px-5 text-justify"
+            class="text-secondary-light px-5 text-base font-medium text-justify"
           >
             In Cascading Style Sheets, CSS grid layout or CSS grid creates
             complex responsive web design grid layouts more easily and
@@ -260,14 +260,14 @@
         <a
           href="https://github.com/jeromedesantos12/responsive-design/tree/main/latihan-mediaquery-dumb"
           target="_blank"
-          class="max-w-md rounded-md pb-10 shadow-md overflow-hidden bg-white cursor-pointer block transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+          class="hover:shadow-lg hover:scale-105 block max-w-md pb-10 overflow-hidden transition duration-300 ease-in-out bg-white rounded-md shadow-md cursor-pointer"
         >
           <img src="src/img/project/project3.gif" alt="Gallery Img" />
-          <h3 class="font-semibold text-xl text-dark mt-5 mb-3 px-5">
+          <h3 class="text-dark px-5 mt-5 mb-3 text-xl font-semibold">
             Media Query
           </h3>
           <p
-            class="font-medium text-base text-secondary-light px-5 text-justify"
+            class="text-secondary-light px-5 text-base font-medium text-justify"
           >
             Media queries is a feature of CSS 3 allowing content rendering to
             adapt to different conditions such as screen resolution (e.g. mobile
@@ -277,14 +277,14 @@
         <a
           href="https://github.com/jeromedesantos12/batch62/tree/master/task2"
           target="_blank"
-          class="max-w-md rounded-md pb-10 shadow-md overflow-hidden bg-white cursor-pointer block transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+          class="hover:shadow-lg hover:scale-105 block max-w-md pb-10 overflow-hidden transition duration-300 ease-in-out bg-white rounded-md shadow-md cursor-pointer"
         >
           <img src="src/img/project/project4.gif" alt="Gallery Img" />
-          <h3 class="font-semibold text-xl text-dark mt-5 mb-3 px-5">
+          <h3 class="text-dark px-5 mt-5 mb-3 text-xl font-semibold">
             Responsive
           </h3>
           <p
-            class="font-medium text-base text-secondary-light px-5 text-justify"
+            class="text-secondary-light px-5 text-base font-medium text-justify"
           >
             Responsive web design (RWD) or responsive design is an approach to
             web design that aims to make web pages render well on a variety of
@@ -295,12 +295,12 @@
         <a
           href="https://github.com/jeromedesantos12/batch62/tree/master/task4"
           target="_blank"
-          class="max-w-md rounded-md pb-10 shadow-md overflow-hidden bg-white cursor-pointer block transition duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+          class="hover:shadow-lg hover:scale-105 block max-w-md pb-10 overflow-hidden transition duration-300 ease-in-out bg-white rounded-md shadow-md cursor-pointer"
         >
           <img src="src/img/project/project5.gif" alt="Gallery Img" />
-          <h3 class="font-semibold text-xl text-dark mt-5 mb-3 px-5">Form</h3>
+          <h3 class="text-dark px-5 mt-5 mb-3 text-xl font-semibold">Form</h3>
           <p
-            class="font-medium text-base text-secondary-light px-5 text-justify"
+            class="text-secondary-light px-5 text-base font-medium text-justify"
           >
             A webform, web form or HTML form on a web page allows a user to
             enter data that is sent to a server for processing. Forms can
@@ -314,12 +314,12 @@
 
     <!-- Footer Start -->
     <footer class="bg-dark pt-10 pb-10">
-      <div class="flex flex-wrap gap-2 justify-center mb-5">
+      <div class="flex flex-wrap justify-center gap-2 mb-5">
         <!-- YouTube -->
         <a
           href="https://youtube.com/@kursusTUTOR"
           target="_blank"
-          class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+          class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
         >
           <i class="fa-brands fa-youtube"></i>
         </a>
@@ -327,7 +327,7 @@
         <a
           href="https://facebook.com/jeromedesantos12"
           target="_blank"
-          class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+          class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
         >
           <i class="fa-brands fa-facebook-f"></i>
         </a>
@@ -335,7 +335,7 @@
         <a
           href="https://instagram.com/jeremy001_"
           target="_blank"
-          class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+          class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
         >
           <i class="fa-brands fa-instagram"></i>
         </a>
@@ -343,7 +343,7 @@
         <a
           href="https://x.com/jeremy001_"
           target="_blank"
-          class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+          class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
         >
           <i class="fa-brands fa-x-twitter"></i>
         </a>
@@ -351,7 +351,7 @@
         <a
           href="https://linkedin.com/in/jeromedesantos12"
           target="_blank"
-          class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+          class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
         >
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
@@ -359,13 +359,13 @@
         <a
           href="https://github.com/jeromedesantos12"
           target="_blank"
-          class="w-9 h-9 rounded-full flex justify-center items-center text-secondary-light border border-secondary-light hover:border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out"
+          class="w-9 h-9 text-secondary-light border-secondary-light hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center transition duration-300 ease-in-out border rounded-full"
         >
           <i class="fa-brands fa-github"></i>
         </a>
       </div>
       <p
-        class="font-medium text-sm text-secondary text-center transition hover:text-secondary-light duration-300 ease-in-out"
+        class="text-secondary hover:text-secondary-light text-sm font-medium text-center transition duration-300 ease-in-out"
       >
         Made with &#9829; by
         <a href="https://github.com/jeromedesantos12" target="_blank"
@@ -374,5 +374,14 @@
       </p>
     </footer>
     <!-- Footer End -->
+
+    <!-- Back to top Start -->
+    <a
+      href="#"
+      class="bottom-10 right-10 h-14 w-14 bg-primary hover:animate-pulse rounded- fixed z-10 flex items-center justify-center p-4 text-white -rotate-90 rounded-full"
+    >
+      <i class="fa-solid fa-play"></i>
+    </a>
+    <!-- Back to top End -->
   </body>
 </html>
