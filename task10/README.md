@@ -8,11 +8,9 @@ Mengamati elemen #home. Saat tidak terlihat di viewport, tombol muncul.
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) {
-      console.log("bawah");
       toTop.classList.remove(`invisible`);
       toTop.classList.remove(`opacity-0`);
     } else {
-      console.log("atas");
       toTop.classList.add(`invisible`);
       toTop.classList.add(`opacity-0`);
     }
