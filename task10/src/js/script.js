@@ -18,15 +18,18 @@ window.addEventListener(`click`, (e) => {
 });
 
 // Scroll to top button
-window.onscroll = () => {
-  if (window.pageYOffset > home.offsetTop) {
-    toTop.classList.remove(`invisible`);
-    toTop.classList.remove(`opacity-0`);
-  } else {
-    toTop.classList.add(`invisible`);
-    toTop.classList.add(`opacity-0`);
-  }
-};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) {
+      toTop.classList.remove(`invisible`);
+      toTop.classList.remove(`opacity-0`);
+    } else {
+      toTop.classList.add(`invisible`);
+      toTop.classList.add(`opacity-0`);
+    }
+  });
+});
+observer.observe(home);
 
 // Darkmode toggle
 const darkToggle = document.querySelector(`#dark-toggle`);
