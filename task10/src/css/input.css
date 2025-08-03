@@ -17,7 +17,7 @@
 
 @layer base {
   * {
-    @apply transition duration-300 ease-in-out;
+    @apply transition duration-300 ease-in-out border-2 border-red-700;
   }
 }
 
